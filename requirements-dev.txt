@@ -1,0 +1,5 @@
+# Chỉ cần khi sinh lại hoặc chạy hàng loạt notebook bằng các script trong tools/
+-r requirements.txt
+nbformat==5.11.1
+nbclient==0.11.0
+ipykernel==7.4.0

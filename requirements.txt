@@ -1,10 +1,14 @@
-numpy
-scipy
-sympy
-matplotlib
+# Các phiên bản đã dùng để chạy toàn bộ notebook (Python 3.14.4, tháng 11/2026).
+# API của qiskit-ibm-runtime và chính sách của D-Wave/IBM thay đổi thường xuyên;
+# nếu nâng phiên bản, hãy chạy lại các notebook để kiểm tra.
+numpy==2.5.4
+scipy==1.18.1
+sympy==1.14.0
+matplotlib==3.11.2
+networkx==3.7
 jupyter
-dimod
-dwave-ocean-sdk
-qiskit
-qiskit-aer
-qiskit-ibm-runtime
+dimod==0.12.22
+dwave-ocean-sdk==9.5.0
+qiskit==2.6.2
+qiskit-aer==0.18.2
+qiskit-ibm-runtime==0.52.0

@@ -36,7 +36,9 @@ pip install -r requirements.txt
 jupyter notebook
 ```
 
-Các notebook chạy được bằng trình mô phỏng, không cần tài khoản. Phần chạy trên máy thật cần tài khoản D-Wave Leap hoặc IBM Quantum (xem Phần C).
+Các phiên bản trong [requirements.txt](requirements.txt) được ghim theo bản đã chạy thử với Python 3.14. Các notebook chạy được bằng trình mô phỏng, không cần tài khoản. Phần chạy trên máy thật cần tài khoản D-Wave Leap hoặc IBM Quantum (xem Phần C).
+
+Nếu muốn sinh lại hoặc chạy hàng loạt notebook, xem [tools/notebook-generators/README.md](tools/notebook-generators/README.md).
 
 ## Notebook cho Phần A
 
@@ -72,6 +74,13 @@ Mỗi chương B bám theo một chương A, bổ sung giải thích, thí nghi�
 | [IBM Quantum](docs/C-hardware/ibm-quantum.md) | [02-ibm-quantum-qaoa](notebooks/C-hardware/02-ibm-quantum-qaoa.ipynb) |
 
 Hai notebook này tự chuyển sang trình mô phỏng khi không tìm thấy tài khoản, nên chạy được ngay cả khi bạn chưa đăng ký. Lưu ý chính sách gói miễn phí của D-Wave và IBM thay đổi thường xuyên; đọc phần "Lưu ý" ở đầu mỗi hướng dẫn trước khi đăng ký.
+
+## Giấy phép và ghi nguồn
+
+- **Bài báo gốc** (F. Chicano, G. Luque, Z. A. Dahi, R. Gil-Merino, arXiv:2412.15778) được phân phối theo giấy phép [Creative Commons Attribution 4.0 (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/). Bản PDF trong [references/](references/) và bản dịch ở Phần A được phép theo giấy phép đó.
+- **Phần A là bản dịch có chỉnh sửa**, tức tác phẩm phái sinh của bài gốc. Các thay đổi so với bài gốc gồm: dịch sang tiếng Việt, vẽ lại các hình (trừ Hình 3, chỉ dẫn link), sửa các lỗi của bài gốc (mỗi chỗ nằm trong khung **Đã sửa so với bài gốc** kèm giải thích), và thêm các khung **Ghi chú người dịch**. Bản dịch không do các tác giả gốc xác nhận hay tài trợ.
+- **Văn bản tài liệu do người biên soạn viết** (Phần B, Phần C, lời nói đầu, chữ trong notebook): [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+- **Mã nguồn** ([code/](code/), [tools/](tools/) và các ô mã trong notebook): giấy phép MIT, xem [LICENSE](LICENSE).
 
 ## Trạng thái
 
