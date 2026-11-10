@@ -50,6 +50,20 @@ Các notebook trong [notebooks/A-examples/](notebooks/A-examples/) tái hiện v
 | [04-quantum-annealer-maxsat](notebooks/A-examples/04-quantum-annealer-maxsat.ipynb) | Ví dụ 15–16, Hình 4, Bảng 2 (không cần tài khoản D-Wave) |
 | [05-qaoa-integer-function](notebooks/A-examples/05-qaoa-integer-function.ipynb) | Ví dụ 17–19, Hình 8–10, Bảng 3 (trình mô phỏng Qiskit Aer) |
 
+## Phần B: mở rộng
+
+Mỗi chương B bám theo một chương A, bổ sung giải thích, thí nghiệm bằng số và bài tập có lời giải.
+
+| Chương | Mở rộng cho | Notebook |
+|---|---|---|
+| [B-01: Kỳ vọng thực tế về lợi thế lượng tử](docs/B-extensions/01-quantum-advantage.md) | §1, §7 | |
+| [B-02a: Toán nền và dẫn công thức QUBO ↔ Ising](docs/B-extensions/02-math-and-qubo-ising.md) | §2.1 | [A-01](notebooks/A-examples/01-qubo-and-ising.ipynb) |
+| [B-02b: Hamiltonian, quantum annealing và simulated annealing](docs/B-extensions/02-hamiltonian-and-annealing.md) | §2.2, §2.3 | [B1](notebooks/B-extensions/01-hamiltonian-and-annealing.ipynb) |
+| [B-04: Hàm phạt và cách mã hóa](docs/B-extensions/04-penalties-and-encodings.md) | §4 | [B3](notebooks/B-extensions/03-penalty-and-encodings.ipynb) |
+| [B-05: Minor-embedding và chain](docs/B-extensions/05-embedding-and-chains.md) | §5 | [B4](notebooks/B-extensions/04-embedding-scaling.ipynb) |
+| [B-06: QAOA, cảnh quan và độ sâu](docs/B-extensions/06-qaoa-landscape.md) | §6 | [B2](notebooks/B-extensions/02-qaoa-landscape.ipynb) |
+| [B-07: So sánh công bằng và tài liệu đọc thêm](docs/B-extensions/07-benchmarking.md) | §7 | [B5](notebooks/B-extensions/05-benchmarking-toy.ipynb) |
+
 ## Phần C: chạy trên phần cứng thật
 
 | Hướng dẫn | Notebook |
@@ -61,4 +75,10 @@ Hai notebook này tự chuyển sang trình mô phỏng khi không tìm thấy t
 
 ## Trạng thái
 
-Đang xây dựng. Đã xong: bản dịch Phần A (§1–§7), 5 notebook cho Phần A, hướng dẫn và notebook Phần C. Chưa có: Phần B (mở rộng). Các notebook Phần C mới được chạy ở chế độ mô phỏng; phần chạy trên máy thật chưa được kiểm chứng bằng tài khoản thật.
+Bản đầu tiên của cả ba phần đã hoàn thành:
+
+- **Phần A:** bản dịch §1–§7 và 5 notebook. Đã sửa các lỗi tìm thấy trong bài gốc, mỗi chỗ có giải thích.
+- **Phần B:** 7 chương mở rộng và 5 notebook.
+- **Phần C:** hướng dẫn và notebook cho D-Wave Leap và IBM Quantum.
+
+Tất cả notebook đã được chạy ở chế độ mô phỏng. Phần chạy trên máy thật ở Phần C chưa được kiểm chứng bằng tài khoản thật. Nội dung về thực nghiệm lượng tử (B-01) phản ánh tình hình tháng 11/2026 và có thể lỗi thời nhanh.

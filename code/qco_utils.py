@@ -82,6 +82,38 @@ def integer_encoding(a, c):
 
 
 # --------------------------------------------------------------------------- #
+# Mô phỏng chính xác QAOA bằng vector trạng thái (dùng cho Phần B)
+# --------------------------------------------------------------------------- #
+def cost_vector(poly, n):
+    """Mảng giá trị hàm mục tiêu: cost[i] = f(x) với x_{j+1} = bit j của i (little-endian như Qiskit)."""
+    out = np.empty(2**n)
+    for i in range(2**n):
+        x = [(i >> j) & 1 for j in range(n)]
+        out[i] = evaluate(poly, x)
+    return out
+
+
+def qaoa_state(cost, gammas, betas):
+    """Trạng thái QAOA (41): prod_k exp(-i beta_k sum X) exp(-i gamma_k H_P) |+>^n, với H_P = diag(cost)."""
+    cost = np.asarray(cost, dtype=float)
+    n = int(round(math.log2(len(cost))))
+    psi = np.full(2**n, 2 ** (-n / 2), dtype=complex)
+    for g, b in zip(gammas, betas):
+        psi = np.exp(-1j * g * cost) * psi
+        c, s = math.cos(b), -1j * math.sin(b)  # exp(-i b X) = cos(b) I - i sin(b) X
+        for q in range(n):
+            v = psi.reshape(2 ** (n - q - 1), 2, 2**q)
+            psi = (c * v + s * v[:, ::-1, :]).reshape(-1)
+    return psi
+
+
+def qaoa_expectation(cost, gammas, betas):
+    """Phương trình (42): giá trị kỳ vọng của H_P trong trạng thái QAOA."""
+    p = np.abs(qaoa_state(cost, gammas, betas)) ** 2
+    return float(p @ np.asarray(cost, dtype=float))
+
+
+# --------------------------------------------------------------------------- #
 # QUBO <-> Ising (phương trình (4)-(11))
 # --------------------------------------------------------------------------- #
 def qubo_value(Q, c, x):

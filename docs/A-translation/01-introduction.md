@@ -11,7 +11,7 @@ Máy tính lượng tử tận dụng các nguyên lý của cơ học lượng 
 
 **Từ khóa:** quantum optimization · quantum computing · quantum annealer · QUBO.
 
-> **Ghi chú người dịch:** Cụm "tính toán dường như song song" và "tăng tốc" trong phần tóm tắt dễ gây hiểu lầm rằng máy lượng tử thử mọi lời giải cùng lúc rồi chọn ra đáp án tốt nhất. Thực tế, phép đo chỉ trả về *một* chuỗi bit ngẫu nhiên theo phân phối xác suất; các thuật toán lượng tử phải được thiết kế để khuếch đại xác suất của kết quả tốt. Lợi thế tốc độ chỉ được chứng minh cho một số bài toán cụ thể, chưa phải cho tối ưu tổ hợp nói chung. Xem [B-extensions/01-quantum-advantage.md](../B-extensions/01-quantum-advantage.md) (sẽ viết).
+> **Ghi chú người dịch:** Cụm "tính toán dường như song song" và "tăng tốc" trong phần tóm tắt dễ gây hiểu lầm rằng máy lượng tử thử mọi lời giải cùng lúc rồi chọn ra đáp án tốt nhất. Thực tế, phép đo chỉ trả về *một* chuỗi bit ngẫu nhiên theo phân phối xác suất; các thuật toán lượng tử phải được thiết kế để khuếch đại xác suất của kết quả tốt. Lợi thế tốc độ chỉ được chứng minh cho một số bài toán cụ thể, chưa phải cho tối ưu tổ hợp nói chung. Xem [B-extensions/01-quantum-advantage.md](../B-extensions/01-quantum-advantage.md).
 
 ---
 

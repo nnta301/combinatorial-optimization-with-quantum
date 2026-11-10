@@ -71,7 +71,7 @@ Trừ khi có nói khác, xuyên suốt bài báo ta giả sử mọi hàm mục
 
 > **Ghi chú người dịch:**
 > - Phép thế $x_j = (1 - s_j)/2$ tương đương $s_j = (-1)^{x_j}$: $x_j = 0 \mapsto s_j = 1$, $x_j = 1 \mapsto s_j = -1$. Chiều này quan trọng ở §6, vì $Z|x\rangle = (-1)^x |x\rangle$.
-> - Các công thức (8)–(11) được suy ra bằng cách thế $x_j x_k = (1 - s_j - s_k + s_j s_k)/4$ vào (5) và dùng $Q$ đối xứng. Phần dẫn từng bước sẽ có ở Phần B (sẽ viết).
+> - Các công thức (8)–(11) được suy ra bằng cách thế $x_j x_k = (1 - s_j - s_k + s_j s_k)/4$ vào (5) và dùng $Q$ đối xứng. Phần dẫn từng bước có ở [B-02a](../B-extensions/02-math-and-qubo-ising.md).
 
 ---
 
