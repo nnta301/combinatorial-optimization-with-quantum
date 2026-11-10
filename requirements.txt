@@ -1,0 +1,10 @@
+numpy
+scipy
+sympy
+matplotlib
+jupyter
+dimod
+dwave-ocean-sdk
+qiskit
+qiskit-aer
+qiskit-ibm-runtime
