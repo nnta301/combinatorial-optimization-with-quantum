@@ -29,8 +29,7 @@
 | tensor product | tích tensor |
 | computational basis | cơ sở tính toán: {\|0⟩, \|1⟩} |
 | decoherence | mất kết hợp: hệ mất tính chất lượng tử do tương tác với môi trường |
-| NISQ | Noisy Intermediate Scale Quantum: kỷ nguyên máy lượng tử quy mô trung gian, có nhiễu |
-
+| NISQ | Noisy Intermediate Scale Quantum: kỷ nguyên máy lượng tử quy mô trung gian, có nhiễu 
 | state / state vector | trạng thái / vector trạng thái của hệ |
 | excited state | trạng thái kích thích: trạng thái có năng lượng cao hơn ground state |
 | energy | năng lượng: giá trị của Hamiltonian trên một state |
@@ -61,8 +60,7 @@
 | chain | chuỗi các qubit vật lý biểu diễn một biến |
 | coupling | ghép nối: hệ số J<sub>j,k</sub> là hệ số ghép nối giữa hai qubit |
 | local minimum | cực tiểu địa phương |
-| simulated annealing | ủ mô phỏng (thuật toán cổ điển) |
-
+| simulated annealing | ủ mô phỏng (thuật toán cổ điển) 
 | solution | lời giải / nghiệm của bài toán |
 | optimal solution | nghiệm tối ưu |
 | term | số hạng của đa thức hoặc Hamiltonian |
