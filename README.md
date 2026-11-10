@@ -4,7 +4,7 @@ Tài liệu tiếng Việt dành cho những người đã có nền tảng về
 
 Tài liệu dựa trên bài tutorial:
 
-> F. Chicano, G. Luque, Z. A. Dahi, R. Gil-Merino. *Combinatorial Optimization with Quantum Computers*. arXiv:2412.15778v2 (2025). Bản đã đăng: <https://doi.org/10.1080/0305215X.2024.2435538>
+> F. Chicano, G. Luque, Z. A. Dahi, R. Gil-Merino. *Combinatorial Optimization with Quantum Computers*. arXiv:2412.15778v2 (2025). <https://arxiv.org/abs/2412.15778>
 
 Bản PDF gốc nằm ở [references/2412.15778v2.pdf](references/2412.15778v2.pdf).
 
@@ -38,6 +38,18 @@ jupyter notebook
 
 Các notebook chạy được bằng trình mô phỏng, không cần tài khoản. Phần chạy trên máy thật cần tài khoản D-Wave Leap hoặc IBM Quantum (xem Phần C).
 
+## Notebook cho Phần A
+
+Các notebook trong [notebooks/A-examples/](notebooks/A-examples/) tái hiện và kiểm chứng các ví dụ của bài báo bằng tính toán (duyệt vét cạn, mô phỏng). Mã dùng chung nằm trong [code/qco_utils.py](code/qco_utils.py).
+
+| Notebook | Nội dung |
+|---|---|
+| [01-qubo-and-ising](notebooks/A-examples/01-qubo-and-ising.ipynb) | Chuyển QUBO sang Ising, phương trình (8)–(11) |
+| [02-binary-encoding-and-objective](notebooks/A-examples/02-binary-encoding-and-objective.ipynb) | Ví dụ 4–6, 9–11: biểu diễn nhị phân, hàm mục tiêu |
+| [03-constraints-and-penalty](notebooks/A-examples/03-constraints-and-penalty.ipynb) | Ví dụ 13–14: slack, hằng số phạt |
+| [04-quantum-annealer-maxsat](notebooks/A-examples/04-quantum-annealer-maxsat.ipynb) | Ví dụ 15–16, Hình 4, Bảng 2 (không cần tài khoản D-Wave) |
+| [05-qaoa-integer-function](notebooks/A-examples/05-qaoa-integer-function.ipynb) | Ví dụ 17–19, Hình 8–10, Bảng 3 (trình mô phỏng Qiskit Aer) |
+
 ## Trạng thái
 
-Đang xây dựng. Hiện đã có khung thư mục và bảng thuật ngữ nháp.
+Đang xây dựng. Đã xong: bản dịch Phần A (§1–§7), 5 notebook cho Phần A. Chưa có: Phần B (mở rộng) và Phần C (chạy trên phần cứng thật).
