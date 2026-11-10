@@ -18,6 +18,6 @@ Dành cho người đã quen với tối ưu tổ hợp (bài toán NP-hard, rà
 
 ## Quy ước
 
-- Thuật ngữ tiếng Anh nằm trong ngoặc ở lần xuất hiện đầu, ví dụ "trạng thái cơ bản (ground state)". Xem [bảng thuật ngữ](glossary.md).
+- Thuật ngữ chuyên ngành được giữ nguyên tiếng Anh, ví dụ ground state, superposition, quantum annealer. Nghĩa tiếng Việt xem ở [bảng thuật ngữ](glossary.md).
 - Số phương trình, ví dụ, hình, bảng ở Phần A trùng với bài gốc.
 - Khung **Ghi chú người dịch** là nội dung thêm của người biên soạn.

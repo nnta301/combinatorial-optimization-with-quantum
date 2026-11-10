@@ -1,66 +1,63 @@
-# Bảng thuật ngữ Anh–Việt (bản nháp, cần duyệt)
+# Bảng thuật ngữ
 
-Thuật ngữ nào chưa chắc chắn được đánh dấu **(?)**. Cột "Giữ tiếng Anh" cho biết từ đó nên để nguyên khi viết.
+**Quy ước:** các thuật ngữ chuyên ngành dưới đây được **giữ nguyên tiếng Anh** xuyên suốt tài liệu. Cột bên phải chỉ để giải nghĩa. Những từ thông dụng như "máy tính lượng tử", "tối ưu tổ hợp", "hàm mục tiêu", "ràng buộc" vẫn viết bằng tiếng Việt.
 
 ## Lượng tử
 
-| English | Tiếng Việt | Giữ tiếng Anh |
-|---|---|---|
-| quantum computer | máy tính lượng tử | |
-| qubit | qubit (bit lượng tử) | ✓ |
-| superposition | chồng chập | |
-| entanglement | rối lượng tử (đồng nghĩa: vướng víu, liên đới lượng tử) | |
-| measurement | phép đo | |
-| quantum gate | cổng lượng tử | |
-| quantum circuit | mạch lượng tử | |
-| gate-based | dựa trên cổng | |
-| adiabatic | đoạn nhiệt | |
-| adiabatic theorem | định lý đoạn nhiệt | |
-| quantum annealing | ủ lượng tử | |
-| quantum annealer | máy ủ lượng tử | ✓ |
-| quantum tunneling | hiệu ứng đường hầm lượng tử | |
-| Hamiltonian | Hamiltonian | ✓ |
-| ground state | trạng thái cơ bản | |
-| energy gap | khe năng lượng: chênh lệch giữa mức năng lượng thấp nhất và mức kích thích thấp nhất của Hamiltonian (không phải band gap của chất rắn) | |
-| Bloch sphere | mặt cầu Bloch | |
-| Hadamard gate | cổng Hadamard | |
-| Pauli-X/Y/Z gate | cổng Pauli-X/Y/Z | |
-| CNOT | cổng CNOT | ✓ |
-| unitary | unita | |
-| tensor product | tích tensor | |
-| computational basis | cơ sở tính toán | |
-| decoherence | mất kết hợp | |
-| NISQ | kỷ nguyên NISQ | ✓ |
+| Thuật ngữ | Giải nghĩa |
+|---|---|
+| qubit | bit lượng tử |
+| superposition | chồng chập: hệ ở nhiều trạng thái cùng lúc cho đến khi bị đo |
+| entanglement | rối lượng tử (còn gọi vướng víu, liên đới lượng tử): các hạt tương quan với nhau dù cách xa |
+| measurement | phép đo: làm trạng thái sụp về một chuỗi bit cổ điển |
+| quantum gate | cổng lượng tử |
+| quantum circuit | mạch lượng tử |
+| gate-based | mô hình tính toán dựa trên cổng |
+| adiabatic | đoạn nhiệt: mô hình tính toán dựa trên việc Hamiltonian thay đổi chậm |
+| adiabatic theorem | định lý đoạn nhiệt |
+| quantum annealing | ủ lượng tử |
+| quantum annealer | máy ủ lượng tử |
+| quantum tunneling | hiệu ứng đường hầm lượng tử |
+| Hamiltonian | toán tử mô tả năng lượng của hệ |
+| ground state | trạng thái cơ bản: trạng thái có năng lượng thấp nhất |
+| energy gap | khe năng lượng: chênh lệch giữa mức năng lượng thấp nhất và mức kích thích thấp nhất của Hamiltonian (không phải band gap của chất rắn) |
+| Bloch sphere | mặt cầu Bloch |
+| Hadamard gate | cổng Hadamard |
+| Pauli-X / Pauli-Y / Pauli-Z gate | cổng Pauli-X / Y / Z |
+| CNOT | cổng NOT có điều khiển |
+| unitary | unita: phép biến đổi bảo toàn chuẩn |
+| tensor product | tích tensor |
+| computational basis | cơ sở tính toán: {\|0⟩, \|1⟩} |
+| decoherence | mất kết hợp: hệ mất tính chất lượng tử do tương tác với môi trường |
+| NISQ | Noisy Intermediate Scale Quantum: kỷ nguyên máy lượng tử quy mô trung gian, có nhiễu |
 
 ## Tối ưu
 
-| English | Tiếng Việt | Giữ tiếng Anh |
-|---|---|---|
-| combinatorial optimization | tối ưu tổ hợp | |
-| objective function | hàm mục tiêu | |
-| constraint | ràng buộc | |
-| feasible / infeasible | khả thi / không khả thi | |
-| penalty | hàm phạt / phạt | |
-| slack variable | biến bù (slack) | ✓ |
-| pseudo-Boolean function | hàm giả Boolean (pseudo-Boolean) | ✓ |
-| QUBO | QUBO | ✓ |
-| Ising model | mô hình Ising | |
-| Iverson bracket | ngoặc Iverson | |
-| order reduction / quadratization | giảm bậc (còn gọi bậc hai hóa): đưa đa thức bậc cao về bậc hai nhờ biến phụ. Chỉ bắt buộc với quantum annealer, QAOA xử lý được số hạng bậc cao | |
-| minor-embedding | minor-embedding | ✓ |
-| chain | chuỗi qubit (chain) | ✓ |
-| coupling | ghép nối (hệ số J<sub>j,k</sub> là hệ số ghép nối giữa hai qubit) | ✓ |
-| local minimum | cực tiểu địa phương | |
-| simulated annealing | simulated annealing (ủ mô phỏng) | ✓ |
+| Thuật ngữ | Giải nghĩa |
+|---|---|
+| feasible / infeasible | khả thi / không khả thi (thỏa / không thỏa mọi ràng buộc) |
+| penalty | hàm phạt cộng vào hàm mục tiêu khi vi phạm ràng buộc |
+| slack variable | biến bù, dùng để đổi bất đẳng thức thành đẳng thức |
+| pseudo-Boolean function | hàm có biến nhị phân và giá trị thực |
+| QUBO | Quadratic Unconstrained Binary Optimization: tối ưu nhị phân bậc hai không ràng buộc |
+| Ising model | mô hình Ising: hàm bậc hai trên các biến nhận giá trị −1 hoặc 1 |
+| Iverson bracket | ngoặc Iverson: đổi mệnh đề đúng/sai thành 1/0 |
+| order reduction (quadratization) | giảm bậc: đưa đa thức bậc cao về bậc hai nhờ biến phụ. Chỉ bắt buộc với quantum annealer; QAOA xử lý được số hạng bậc cao |
+| minor-embedding | ánh xạ đồ thị của bài toán lên topology của máy |
+| chain | chuỗi các qubit vật lý biểu diễn một biến |
+| coupling | ghép nối: hệ số J<sub>j,k</sub> là hệ số ghép nối giữa hai qubit |
+| local minimum | cực tiểu địa phương |
+| simulated annealing | ủ mô phỏng (thuật toán cổ điển) |
 
 ## Thuật toán
 
-| English | Tiếng Việt | Giữ tiếng Anh |
-|---|---|---|
-| QAOA | QAOA | ✓ |
-| VQE | VQE | ✓ |
-| variational quantum circuit / ansatz | mạch biến phân / ansatz | ✓ |
-| mixer Hamiltonian | Hamiltonian trộn (mixer) | ✓ |
-| layer / depth | lớp / độ sâu | |
-| hybrid algorithm | thuật toán lai | |
-| shots | số lần đo (shots) | ✓ |
+| Thuật ngữ | Giải nghĩa |
+|---|---|
+| QAOA | Quantum Approximate Optimization Algorithm |
+| VQE | Variational Quantum Eigensolver |
+| VQA | Variational Quantum Algorithms: họ thuật toán biến phân, gồm QAOA và VQE |
+| ansatz | mạch lượng tử có tham số, dạng tham số hóa của trạng thái thử |
+| mixer Hamiltonian | Hamiltonian trộn trong QAOA |
+| layer / depth | lớp / độ sâu của ansatz (số lớp p) |
+| hybrid algorithm | thuật toán lai lượng tử – cổ điển |
+| shots | số lần chạy mạch và đo lặp lại |
