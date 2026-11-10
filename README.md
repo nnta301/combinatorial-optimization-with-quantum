@@ -50,6 +50,15 @@ Các notebook trong [notebooks/A-examples/](notebooks/A-examples/) tái hiện v
 | [04-quantum-annealer-maxsat](notebooks/A-examples/04-quantum-annealer-maxsat.ipynb) | Ví dụ 15–16, Hình 4, Bảng 2 (không cần tài khoản D-Wave) |
 | [05-qaoa-integer-function](notebooks/A-examples/05-qaoa-integer-function.ipynb) | Ví dụ 17–19, Hình 8–10, Bảng 3 (trình mô phỏng Qiskit Aer) |
 
+## Phần C: chạy trên phần cứng thật
+
+| Hướng dẫn | Notebook |
+|---|---|
+| [D-Wave Leap](docs/C-hardware/dwave-leap.md) | [01-dwave-leap-maxsat](notebooks/C-hardware/01-dwave-leap-maxsat.ipynb) |
+| [IBM Quantum](docs/C-hardware/ibm-quantum.md) | [02-ibm-quantum-qaoa](notebooks/C-hardware/02-ibm-quantum-qaoa.ipynb) |
+
+Hai notebook này tự chuyển sang trình mô phỏng khi không tìm thấy tài khoản, nên chạy được ngay cả khi bạn chưa đăng ký. Lưu ý chính sách gói miễn phí của D-Wave và IBM thay đổi thường xuyên; đọc phần "Lưu ý" ở đầu mỗi hướng dẫn trước khi đăng ký.
+
 ## Trạng thái
 
-Đang xây dựng. Đã xong: bản dịch Phần A (§1–§7), 5 notebook cho Phần A. Chưa có: Phần B (mở rộng) và Phần C (chạy trên phần cứng thật).
+Đang xây dựng. Đã xong: bản dịch Phần A (§1–§7), 5 notebook cho Phần A, hướng dẫn và notebook Phần C. Chưa có: Phần B (mở rộng). Các notebook Phần C mới được chạy ở chế độ mô phỏng; phần chạy trên máy thật chưa được kiểm chứng bằng tài khoản thật.
