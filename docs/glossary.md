@@ -31,6 +31,20 @@
 | decoherence | mất kết hợp: hệ mất tính chất lượng tử do tương tác với môi trường |
 | NISQ | Noisy Intermediate Scale Quantum: kỷ nguyên máy lượng tử quy mô trung gian, có nhiễu |
 
+| state / state vector | trạng thái / vector trạng thái của hệ |
+| excited state | trạng thái kích thích: trạng thái có năng lượng cao hơn ground state |
+| energy | năng lượng: giá trị của Hamiltonian trên một state |
+| operator | toán tử |
+| eigenvalue / eigenvector | trị riêng / vector riêng |
+| amplitude | biên độ (số phức) của một state trong superposition |
+| diagonal matrix | ma trận đường chéo |
+| expectation value | giá trị kỳ vọng của một đại lượng đo được |
+| measurement probability | xác suất đo được một kết quả |
+| noise | nhiễu |
+| native gate | gate gốc mà phần cứng thực thi trực tiếp |
+| annealing schedule | lịch ủ: cách tham số s thay đổi theo thời gian |
+| periodic | tuần hoàn |
+
 ## Tối ưu
 
 | Thuật ngữ | Giải nghĩa |
@@ -49,6 +63,18 @@
 | local minimum | cực tiểu địa phương |
 | simulated annealing | ủ mô phỏng (thuật toán cổ điển) |
 
+| solution | lời giải / nghiệm của bài toán |
+| optimal solution | nghiệm tối ưu |
+| term | số hạng của đa thức hoặc Hamiltonian |
+| coefficient | hệ số |
+| polynomial | đa thức |
+| auxiliary variable | biến phụ |
+| penalty function / penalty constant | hàm phạt / hằng số phạt |
+| landscape | cảnh quan: đồ thị giá trị hàm theo tham số |
+| optimizer | bộ tối ưu |
+| sampling | lấy mẫu |
+| grid | lưới |
+
 ## Thuật toán
 
 | Thuật ngữ | Giải nghĩa |
@@ -60,4 +86,7 @@
 | mixer Hamiltonian | Hamiltonian trộn trong QAOA |
 | layer / depth | lớp / độ sâu của ansatz (số lớp p) |
 | hybrid algorithm | thuật toán lai lượng tử – cổ điển |
+| variational | biến phân: tối ưu tham số của mạch lượng tử bằng vòng lặp cổ điển |
+| simulator | bộ mô phỏng |
+| distribution | phân phối |
 | shots | số lần chạy mạch và đo lặp lại |

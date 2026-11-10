@@ -35,7 +35,7 @@
   <text x="145" y="240" text-anchor="middle" font-size="12">Siêu tham số γⱼ, βⱼ</text>
   <text x="145" y="254" text-anchor="middle" font-size="12">tối ưu, j = 1 … p</text>
   <rect x="335" y="225" width="185" height="35" rx="6" fill="#fff" stroke="#000"/>
-  <text x="427" y="240" text-anchor="middle" font-size="12">Tính giá trị kỳ vọng</text>
+  <text x="427" y="240" text-anchor="middle" font-size="12">Tính expectation value</text>
   <text x="427" y="254" text-anchor="middle" font-size="12">⟨ψ(γ,β)|H_P|ψ(γ,β)⟩</text>
   <line x1="333" y1="242" x2="247" y2="242" stroke="#000" marker-end="url(#a)"/>
   <text x="290" y="236" text-anchor="middle">②</text>

@@ -2,11 +2,11 @@
 
 Các hàm bám theo các công thức trong bài báo của Chicano và cộng sự
 (arXiv:2412.15778): chuyển QUBO sang Ising (8)-(11), cận dưới/cận trên của
-đa thức pseudo-Boolean (34)-(35), hằng số phạt (36), biểu diễn nhị phân của biến
+polynomial pseudo-Boolean (34)-(35), penalty constant (36), biểu diễn nhị phân của biến
 nguyên (18)-(20).
 
-Một đa thức pseudo-Boolean được lưu dưới dạng từ điển {frozenset(S): a_S}, với S là
-tập chỉ số biến (đánh số từ 0) và a_S là hệ số; S rỗng ứng với hằng số.
+Một polynomial pseudo-Boolean được lưu dưới dạng từ điển {frozenset(S): a_S}, với S là
+tập chỉ số biến (đánh số từ 0) và a_S là coefficient; S rỗng ứng với hằng số.
 """
 from __future__ import annotations
 
@@ -17,7 +17,7 @@ import numpy as np
 
 
 # --------------------------------------------------------------------------- #
-# Đa thức pseudo-Boolean
+# Polynomial pseudo-Boolean
 # --------------------------------------------------------------------------- #
 def multilinear(expr, xs):
     """Khai triển biểu thức sympy theo các biến nhị phân `xs` và áp dụng x^k = x.
@@ -35,12 +35,12 @@ def multilinear(expr, xs):
 
 
 def evaluate(poly, x):
-    """Giá trị của đa thức pseudo-Boolean tại vector nhị phân x."""
+    """Giá trị của polynomial pseudo-Boolean tại vector nhị phân x."""
     return sum(c * math.prod(x[i] for i in S) for S, c in poly.items())
 
 
 def brute_force(poly, n):
-    """Duyệt vét cạn {0,1}^n. Trả về (giá trị nhỏ nhất, danh sách các nghiệm tối ưu)."""
+    """Duyệt vét cạn {0,1}^n. Trả về (giá trị nhỏ nhất, danh sách các optimal solution)."""
     best, arg = None, []
     for x in itertools.product((0, 1), repeat=n):
         v = evaluate(poly, x)
@@ -89,7 +89,7 @@ def integer_encoding(a, c):
 
 
 # --------------------------------------------------------------------------- #
-# Mô phỏng chính xác QAOA bằng vector trạng thái (dùng cho Phần B)
+# Mô phỏng chính xác QAOA bằng state vector (dùng cho Phần B)
 # --------------------------------------------------------------------------- #
 def cost_vector(poly, n):
     """Mảng giá trị hàm mục tiêu: cost[i] = f(x) với x_{j+1} = bit j của i (little-endian như Qiskit)."""
@@ -101,7 +101,7 @@ def cost_vector(poly, n):
 
 
 def qaoa_state(cost, gammas, betas):
-    """Trạng thái QAOA (41): prod_k exp(-i beta_k sum X) exp(-i gamma_k H_P) |+>^n, với H_P = diag(cost)."""
+    """State QAOA (41): prod_k exp(-i beta_k sum X) exp(-i gamma_k H_P) |+>^n, với H_P = diag(cost)."""
     cost = np.asarray(cost, dtype=float)
     n = int(round(math.log2(len(cost))))
     psi = np.full(2**n, 2 ** (-n / 2), dtype=complex)
@@ -115,7 +115,7 @@ def qaoa_state(cost, gammas, betas):
 
 
 def qaoa_expectation(cost, gammas, betas):
-    """Phương trình (42): giá trị kỳ vọng của H_P trong trạng thái QAOA."""
+    """Phương trình (42): expectation value của H_P trong state QAOA."""
     p = np.abs(qaoa_state(cost, gammas, betas)) ** 2
     return float(p @ np.asarray(cost, dtype=float))
 

@@ -68,7 +68,7 @@ Nếu chưa có token, `DWaveSampler()` báo `ValueError: API token not defined`
 
 ## 4. Chạy MAX-SAT trên QPU
 
-Đây là Hình 4 của bài báo, **đã sửa** (thêm số hạng `- 2 * Binary('x3') * Binary('z')`; xem ghi chú ở Mục 5 Phần A):
+Đây là Hình 4 của bài báo, **đã sửa** (thêm term `- 2 * Binary('x3') * Binary('z')`; xem ghi chú ở Mục 5 Phần A):
 
 ```python
 from dimod import Binary
@@ -92,30 +92,30 @@ print(result.aggregate())
 | Cột | Ý nghĩa |
 |---|---|
 | `x1 x2 x3 z` | Giá trị các biến của mẫu |
-| `energy` | Giá trị hàm QUBO của mẫu. Với $z = x_2 x_3$ (tức hàm phạt bằng 0), nó bằng số clause không được thỏa |
+| `energy` | Giá trị hàm QUBO của mẫu. Với $z = x_2 x_3$ (tức penalty function bằng 0), nó bằng số clause không được thỏa |
 | `num_occurrences` | Số lần mẫu này xuất hiện trong `num_reads` lần chạy |
 | `chain_break_fraction` | Tỉ lệ chain bị đứt (xem `result.record.chain_break_fraction`) |
 
 Thông tin thêm: `result.info["timing"]["qpu_access_time"]` là thời gian QPU được tính (micro giây), tiện để theo dõi mức tiêu thụ.
 
-**Điều cần quan sát:** với QUBO đã sửa, cả **5** phép gán thỏa mọi clause (`000`, `011`, `100`, `101`, `111`) nên có Energy bằng 0. Bảng 2 của bài gốc chỉ có 3 vì mã gốc thiếu số hạng phạt. Một số mẫu có Energy 1 hoặc cao hơn vẫn xuất hiện do nhiễu, và vì chain bị đứt.
+**Điều cần quan sát:** với QUBO đã sửa, cả **5** phép gán thỏa mọi clause (`000`, `011`, `100`, `101`, `111`) nên có Energy bằng 0. Bảng 2 của bài gốc chỉ có 3 vì mã gốc thiếu term phạt. Một số mẫu có Energy 1 hoặc cao hơn vẫn xuất hiện do noise, và vì chain bị đứt.
 
 ## 6. Các tham số nên thử
 
 | Tham số | Tác dụng |
 |---|---|
-| `num_reads` | Số lần chạy. Tăng lên để thấy rõ phân bố, nhưng tốn thời gian QPU hơn |
+| `num_reads` | Số shots. Tăng lên để thấy rõ phân bố, nhưng tốn thời gian QPU hơn |
 | `chain_strength` | Độ mạnh coupling trong chain (Mục 5.2 Phần A). Quá nhỏ thì chain đứt; quá lớn thì lấn át phần bài toán thật. Notebook có ô quét vài giá trị |
-| `annealing_time` | Thời gian mỗi lần annealing (micro giây). Dài hơn làm quá trình gần với "đoạn nhiệt" hơn, nhưng có giới hạn tùy máy |
+| `annealing_time` | Thời gian mỗi lần annealing (micro giây). Dài hơn làm quá trình gần với "adiabatic" hơn, nhưng có giới hạn tùy máy |
 | `label` | Nhãn job |
 
 Các giá trị cụ thể hợp lệ phụ thuộc từng máy; xem `qpu.properties` hoặc tài liệu Ocean.
 
 ## 7. Máy thật khác trình mô phỏng ở đâu?
 
-- Trình mô phỏng (`ExactSolver`, `SimulatedAnnealingSampler`) hoạt động trên biến logic, không có chain, không có nhiễu phần cứng.
+- Trình mô phỏng (`ExactSolver`, `SimulatedAnnealingSampler`) hoạt động trên biến logic, không có chain, không có noise phần cứng.
 - Trên QPU, đồ thị bài toán phải được nhúng vào topology của máy. Chạy Mục 2 của notebook để thấy: với bài toán nhỏ này, topology Chimera cần một chain 2 qubit cho biến $x_3$, trong khi Pegasus và Zephyr nhúng được mà không cần chain.
-- Kết quả trên QPU thay đổi giữa các lần chạy; đừng kỳ vọng số lần xuất hiện giống Bảng 2.
+- Kết quả trên QPU thay đổi giữa các lần chạy; đừng expectation số lần xuất hiện giống Bảng 2.
 
 ## 8. Xử lý sự cố
 

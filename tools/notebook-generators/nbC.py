@@ -44,7 +44,7 @@ except Exception as e:
 md(r"""
 ## 1. Mô hình: phương trình (39) với $P = 7$ (bản đã sửa)
 
-Đây là QUBO đúng của Ví dụ 15, có đủ số hạng $-2x_3 z$. (Hình 4 trong bài gốc thiếu số hạng này; xem ghi chú ở Mục 5 của Phần A.)
+Đây là QUBO đúng của Ví dụ 15, có đủ term $-2x_3 z$. (Hình 4 trong bài gốc thiếu term này; xem ghi chú ở Mục 5 của Phần A.)
 """),
 code(r"""
 x1, x2, x3, z = (Binary(v) for v in ("x1", "x2", "x3", "z"))
@@ -102,7 +102,7 @@ print("\nCác phép gán Energy = 0 tìm được:", sorted(found))
 print("Đủ cả 5 phép gán thỏa mọi clause?", found == set(satisfying))
 """),
 md(r"""
-Với QUBO đã sửa, ta kỳ vọng thấy **cả 5** phép gán `000`, `011`, `100`, `101`, `111` có Energy bằng 0 (khác với Bảng 2 của bài gốc, vốn chỉ có 3). Trên máy thật, vài trạng thái Energy 1 hoặc cao hơn cũng xuất hiện do nhiễu và do chain bị đứt; số lần xuất hiện cụ thể thay đổi giữa các lần chạy.
+Với QUBO đã sửa, ta expectation thấy **cả 5** phép gán `000`, `011`, `100`, `101`, `111` có Energy bằng 0 (khác với Bảng 2 của bài gốc, vốn chỉ có 3). Trên máy thật, vài state Energy 1 hoặc cao hơn cũng xuất hiện do noise và do chain bị đứt; số lần xuất hiện cụ thể thay đổi giữa các lần chạy.
 """),
 code(r"""
 if ON_QPU:
@@ -153,7 +153,7 @@ md(r"""
 
 Đi kèm [docs/C-hardware/ibm-quantum.md](../../docs/C-hardware/ibm-quantum.md) và [Phần A, Mục 6](../../docs/A-translation/06-gate-based.md).
 
-**Notebook chạy được dù bạn có hay không có tài khoản IBM Quantum.** Nếu không kết nối được, nó dùng `FakeKingston`: một mô hình nhiễu mô phỏng chip Heron r2 156 qubit của IBM, chạy hoàn toàn trên máy bạn. Giao diện (`generate_preset_pass_manager`, `SamplerV2`) giống hệt khi chạy máy thật, nên ta thấy được tác động của nhiễu và quá trình transpile.
+**Notebook chạy được dù bạn có hay không có tài khoản IBM Quantum.** Nếu không kết nối được, nó dùng `FakeKingston`: một mô hình noise mô phỏng chip Heron r2 156 qubit của IBM, chạy hoàn toàn trên máy bạn. Giao diện (`generate_preset_pass_manager`, `SamplerV2`) giống hệt khi chạy máy thật, nên ta thấy được tác động của noise và quá trình transpile.
 
 Chiến lược quan trọng để tiết kiệm thời gian QPU (gói miễn phí giới hạn rất ít): **tối ưu tham số trên trình mô phỏng lý tưởng trước, chỉ chạy mạch cuối cùng trên máy thật.**
 """),
@@ -211,7 +211,7 @@ def objective(theta, shots=1000):
 res = minimize(objective, [0.1, 0.1, 0.1, 0.1], method="COBYLA")
 theta = res.x
 print("tham số tối ưu (gamma1, gamma2, beta1, beta2):", np.round(theta, 3))
-print("giá trị trung bình của f khi lấy mẫu:", round(res.fun, 3))
+print("giá trị trung bình của f khi sampling:", round(res.fun, 3))
 """),
 md(r"""
 ## 2. Chọn backend
@@ -232,31 +232,31 @@ except Exception as e:
     backend = FakeKingston()
     ON_REAL = False
     print(f"Không kết nối được IBM Quantum ({type(e).__name__}).")
-    print("-> Dùng FakeKingston (mô phỏng nhiễu cục bộ):", backend.name, "|", backend.num_qubits, "qubit")
+    print("-> Dùng FakeKingston (mô phỏng noise cục bộ):", backend.name, "|", backend.num_qubits, "qubit")
 """),
 md(r"""
 ## 3. Transpile
 
-Máy thật chỉ hiểu một tập cổng gốc (với chip Heron: `rz`, `sx`, `x`, `cz`) và chỉ cho phép CNOT/CZ giữa các qubit nối vật lý với nhau. Bước transpile biến mạch của ta thành mạch "ISA" tương thích. Mạch ba qubit nhỏ của ta nở ra khá nhiều.
+Máy thật chỉ hiểu một tập native gate (với chip Heron: `rz`, `sx`, `x`, `cz`) và chỉ cho phép CNOT/CZ giữa các qubit nối vật lý với nhau. Bước transpile biến mạch của ta thành mạch "ISA" tương thích. Mạch ba qubit nhỏ của ta nở ra khá nhiều.
 """),
 code(r"""
 logical = build_ansatz(theta)
 pm = generate_preset_pass_manager(backend=backend, optimization_level=1, seed_transpiler=1)
 isa = pm.run(logical)
-print("mạch gốc  : độ sâu", logical.depth(), "| số cổng:", dict(logical.count_ops()))
-print("mạch ISA  : độ sâu", isa.depth(), "| số cổng:", dict(isa.count_ops()))
+print("mạch gốc  : depth", logical.depth(), "| số gate:", dict(logical.count_ops()))
+print("mạch ISA  : depth", isa.depth(), "| số gate:", dict(isa.count_ops()))
 """),
 md(r"""
 ## 4. Chạy và so sánh với trình mô phỏng lý tưởng
 
-Ta lấy 1000 mẫu từ backend rồi so với 1000 mẫu từ mô phỏng lý tưởng (cùng tham số). Trên máy thật hoặc mô hình nhiễu, các lời giải xấu như `111` ($f = 9$) xuất hiện nhiều hơn.
+Ta lấy 1000 mẫu từ backend rồi so với 1000 mẫu từ mô phỏng lý tưởng (cùng tham số). Trên máy thật hoặc mô hình noise, các solution xấu như `111` ($f = 9$) xuất hiện nhiều hơn.
 """),
 code(r"""
 SHOTS = 1000
 sampler = Sampler(mode=backend)                # job mode: mỗi lần chạy là một job độc lập
 job = sampler.run([isa], shots=SHOTS)
 if ON_REAL:
-    print("job id:", job.job_id(), "| trạng thái:", job.status())
+    print("job id:", job.job_id(), "| state:", job.status())
 noisy = job.result()[0].data.meas.get_counts()      # thanh ghi tên 'meas' do measure_all() tạo ra
 
 clean = ideal.run(logical, shots=SHOTS, seed_simulator=11).result().get_counts()
@@ -267,7 +267,7 @@ for key in sorted(clean, key=lambda k: -clean[k]):
     print(f" {key} | {x} | {f(x):3d} | {clean[key]:8d} | {noisy.get(key, 0):7d}")
 print()
 print("giá trị trung bình của f -> lý tưởng:", round(mean_f(clean), 2), "| backend:", round(mean_f(noisy), 2))
-print("xác suất đo được lời giải tối ưu 000 -> lý tưởng:", clean.get("000", 0) / SHOTS, "| backend:", noisy.get("000", 0) / SHOTS)
+print("measurement probability được solution tối ưu 000 -> lý tưởng:", clean.get("000", 0) / SHOTS, "| backend:", noisy.get("000", 0) / SHOTS)
 """),
 code(r"""
 if ON_REAL:
@@ -278,7 +278,7 @@ else:
     print("(Chế độ mô phỏng: không có thông tin sử dụng QPU.)")
 """),
 md(r"""
-Nhận xét: nhiễu làm giảm xác suất của lời giải tối ưu và nâng xác suất của các lời giải xấu so với mô phỏng lý tưởng. Đây là điều đã đề cập ở Mục 1 của bài báo (kỷ nguyên NISQ). Với mạch lớn hơn hoặc nhiều lớp $p$ hơn, mạch ISA càng sâu và nhiễu càng nặng, nên số lớp $p$ lớn không phải lúc nào cũng tốt hơn trên máy thật.
+Nhận xét: noise làm giảm xác suất của solution tối ưu và nâng xác suất của các solution xấu so với mô phỏng lý tưởng. Đây là điều đã đề cập ở Mục 1 của bài báo (kỷ nguyên NISQ). Với mạch lớn hơn hoặc nhiều lớp $p$ hơn, mạch ISA càng sâu và noise càng nặng, nên số layer $p$ lớn không phải lúc nào cũng tốt hơn trên máy thật.
 """),
 ]
 save(nb2, "02-ibm-quantum-qaoa.ipynb")

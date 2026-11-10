@@ -48,22 +48,22 @@ Các notebook trong [notebooks/A-examples/](notebooks/A-examples/) tái hiện v
 |---|---|
 | [01-qubo-and-ising](notebooks/A-examples/01-qubo-and-ising.ipynb) | Chuyển QUBO sang Ising, phương trình (8)–(11) |
 | [02-binary-encoding-and-objective](notebooks/A-examples/02-binary-encoding-and-objective.ipynb) | Ví dụ 4–6, 9–11: biểu diễn nhị phân, hàm mục tiêu |
-| [03-constraints-and-penalty](notebooks/A-examples/03-constraints-and-penalty.ipynb) | Ví dụ 13–14: slack, hằng số phạt |
+| [03-constraints-and-penalty](notebooks/A-examples/03-constraints-and-penalty.ipynb) | Ví dụ 13–14: slack, penalty constant |
 | [04-quantum-annealer-maxsat](notebooks/A-examples/04-quantum-annealer-maxsat.ipynb) | Ví dụ 15–16, Hình 4, Bảng 2 (không cần tài khoản D-Wave) |
 | [05-qaoa-integer-function](notebooks/A-examples/05-qaoa-integer-function.ipynb) | Ví dụ 17–19, Hình 8–10, Bảng 3 (trình mô phỏng Qiskit Aer) |
 
 ## Phần B: mở rộng
 
-Mỗi chương B bám theo một chương A, bổ sung giải thích, thí nghiệm bằng số và bài tập có lời giải.
+Mỗi chương B bám theo một chương A, bổ sung giải thích, thí nghiệm bằng số và bài tập có solution.
 
 | Chương | Mở rộng cho | Notebook |
 |---|---|---|
-| [B-01: Kỳ vọng thực tế về lợi thế lượng tử](docs/B-extensions/01-quantum-advantage.md) | §1, §7 | |
+| [B-01: Expectation thực tế về lợi thế lượng tử](docs/B-extensions/01-quantum-advantage.md) | §1, §7 | |
 | [B-02a: Toán nền và dẫn công thức QUBO ↔ Ising](docs/B-extensions/02-math-and-qubo-ising.md) | §2.1 | [A-01](notebooks/A-examples/01-qubo-and-ising.ipynb) |
 | [B-02b: Hamiltonian, quantum annealing và simulated annealing](docs/B-extensions/02-hamiltonian-and-annealing.md) | §2.2, §2.3 | [B1](notebooks/B-extensions/01-hamiltonian-and-annealing.ipynb) |
-| [B-04: Hàm phạt và cách mã hóa](docs/B-extensions/04-penalties-and-encodings.md) | §4 | [B3](notebooks/B-extensions/03-penalty-and-encodings.ipynb) |
+| [B-04: Penalty function và cách mã hóa](docs/B-extensions/04-penalties-and-encodings.md) | §4 | [B3](notebooks/B-extensions/03-penalty-and-encodings.ipynb) |
 | [B-05: Minor-embedding và chain](docs/B-extensions/05-embedding-and-chains.md) | §5 | [B4](notebooks/B-extensions/04-embedding-scaling.ipynb) |
-| [B-06: QAOA, cảnh quan và độ sâu](docs/B-extensions/06-qaoa-landscape.md) | §6 | [B2](notebooks/B-extensions/02-qaoa-landscape.ipynb) |
+| [B-06: QAOA, landscape và depth](docs/B-extensions/06-qaoa-landscape.md) | §6 | [B2](notebooks/B-extensions/02-qaoa-landscape.ipynb) |
 | [B-07: So sánh công bằng và tài liệu đọc thêm](docs/B-extensions/07-benchmarking.md) | §7 | [B5](notebooks/B-extensions/05-benchmarking-toy.ipynb) |
 
 ## Phần C: chạy trên phần cứng thật
@@ -77,12 +77,12 @@ Hai notebook này tự chuyển sang trình mô phỏng khi không tìm thấy t
 
 ## Giấy phép và ghi nguồn
 
-- **Bài báo gốc** (F. Chicano, G. Luque, Z. A. Dahi, R. Gil-Merino, arXiv:2412.15778) được phân phối theo giấy phép [Creative Commons Attribution 4.0 (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/). Bản PDF trong [references/](references/) và bản dịch ở Phần A được phép theo giấy phép đó.
+- **Bài báo gốc** (F. Chicano, G. Luque, Z. A. Dahi, R. Gil-Merino, arXiv:2412.15778) được distribution theo giấy phép [Creative Commons Attribution 4.0 (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/). Bản PDF trong [references/](references/) và bản dịch ở Phần A được phép theo giấy phép đó.
 - **Phần A là bản dịch có chỉnh sửa**, tức tác phẩm phái sinh của bài gốc. Các thay đổi so với bài gốc gồm: dịch sang tiếng Việt, vẽ lại các hình (trừ Hình 3, chỉ dẫn link), sửa các lỗi của bài gốc (mỗi chỗ nằm trong khung **Đã sửa so với bài gốc** kèm giải thích), và thêm các khung **Ghi chú người dịch**. Bản dịch không do các tác giả gốc xác nhận hay tài trợ.
 - **Văn bản tài liệu do người biên soạn viết** (Phần B, Phần C, lời nói đầu, chữ trong notebook): [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 - **Mã nguồn** ([code/](code/), [tools/](tools/) và các ô mã trong notebook): giấy phép MIT, xem [LICENSE](LICENSE).
 
-## Trạng thái
+## State
 
 Bản đầu tiên của cả ba phần đã hoàn thành:
 

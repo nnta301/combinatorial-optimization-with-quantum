@@ -2,7 +2,7 @@
 
 Hướng dẫn chạy mạch QAOA của [Phần A, Mục 6](../A-translation/06-gate-based.md) (Hình 9, Ví dụ 10) trên máy tính lượng tử gate-based của IBM. Notebook đi kèm: [notebooks/C-hardware/02-ibm-quantum-qaoa.ipynb](../../notebooks/C-hardware/02-ibm-quantum-qaoa.ipynb).
 
-> **Notebook chạy được ngay cả khi bạn không có tài khoản.** Nếu không kết nối được IBM Quantum, nó dùng `FakeKingston`, một mô hình nhiễu mô phỏng chip Heron r2 156 qubit, chạy hoàn toàn trên máy bạn. Giao diện giống hệt khi chạy máy thật.
+> **Notebook chạy được ngay cả khi bạn không có tài khoản.** Nếu không kết nối được IBM Quantum, nó dùng `FakeKingston`, một mô hình noise mô phỏng chip Heron r2 156 qubit, chạy hoàn toàn trên máy bạn. Giao diện giống hệt khi chạy máy thật.
 
 ## 0. Gói miễn phí và giới hạn
 
@@ -82,7 +82,7 @@ backend = service.least_busy(min_num_qubits=3, operational=True, simulator=False
 
 # `logical` là mạch build_ansatz(theta) đã tối ưu (xem notebook)
 pm = generate_preset_pass_manager(backend=backend, optimization_level=1)
-isa = pm.run(logical)                       # chuyển sang tập cổng gốc và sơ đồ nối của chip
+isa = pm.run(logical)                       # chuyển sang tập native gate và sơ đồ nối của chip
 
 sampler = Sampler(mode=backend)             # job mode: mỗi lần chạy là một job độc lập
 job = sampler.run([isa], shots=1000)
@@ -91,7 +91,7 @@ counts = job.result()[0].data.meas.get_counts()
 
 Ghi chú:
 
-- **Transpile là bắt buộc.** Máy thật chỉ chạy các cổng gốc (với chip Heron: `rz`, `sx`, `x`, `cz`) và chỉ cho phép cổng hai qubit giữa các qubit nối vật lý với nhau. Mạch 16 lớp cổng của ta nở thành khoảng 46 lớp sau transpile (xem notebook).
+- **Transpile là bắt buộc.** Máy thật chỉ chạy các native gate (với chip Heron: `rz`, `sx`, `x`, `cz`) và chỉ cho phép two-qubit gate giữa các qubit nối vật lý với nhau. Mạch 16 lớp gate của ta nở thành khoảng 46 lớp sau transpile (xem notebook).
 - **Tên thanh ghi.** `circuit.measure_all()` tạo thanh ghi tên `meas`, nên kết quả đọc ở `data.meas`. Nếu bạn tự tạo thanh ghi cổ điển với tên khác thì đổi tên tương ứng.
 - **Job mode.** Mình dùng `Sampler(mode=backend)`. Theo hiểu biết của mình, Open Plan không dùng session; hãy xem tài liệu hiện hành của IBM nếu bạn muốn dùng `Session`.
 - **Job có thể phải chờ hàng đợi** từ vài phút đến hàng giờ. `job.job_id()` cho mã để lấy lại kết quả sau bằng `service.job(job_id)`.
@@ -105,9 +105,9 @@ print(service.usage())    # mức sử dụng của gói hiện tại
 
 ## 6. Đọc kết quả
 
-Ví dụ kết quả của notebook ở chế độ mô phỏng nhiễu (`FakeKingston`, 1000 shots, cùng tham số tối ưu):
+Ví dụ kết quả của notebook ở chế độ mô phỏng noise (`FakeKingston`, 1000 shots, cùng tham số tối ưu):
 
-| Khóa | $(x_1,x_2,x_3)$ | $f$ | Lý tưởng | Có nhiễu |
+| Khóa | $(x_1,x_2,x_3)$ | $f$ | Lý tưởng | Có noise |
 |:-:|:-:|:-:|:-:|:-:|
 | 000 | (0,0,0) | −9 | 312 | 269 |
 | 110 | (0,1,1) | −4 | 285 | 223 |
@@ -118,15 +118,15 @@ Ví dụ kết quả của notebook ở chế độ mô phỏng nhiễu (`FakeKi
 | 001 | (1,0,0) | 4 | 16 | 36 |
 | 111 | (1,1,1) | 9 | 6 | 37 |
 
-Giá trị trung bình của $f$ xấu đi từ khoảng −4,5 (lý tưởng) lên khoảng −3,2 (có nhiễu), và xác suất đo được lời giải tối ưu `000` giảm từ 31% xuống 27%. Đây là bảng của **mô hình nhiễu cục bộ**, không phải kết quả đo trên máy thật. Cả mô hình nhiễu lẫn máy thật đều lấy mẫu ngẫu nhiên nên số liệu của bạn sẽ khác một chút giữa các lần chạy (cột "Lý tưởng" thì cố định vì dùng hạt giống cố định).
+Giá trị trung bình của $f$ xấu đi từ khoảng −4,5 (lý tưởng) lên khoảng −3,2 (có noise), và measurement probability được solution tối ưu `000` giảm từ 31% xuống 27%. Đây là bảng của **mô hình noise cục bộ**, không phải kết quả đo trên máy thật. Cả mô hình noise lẫn máy thật đều sampling ngẫu nhiên nên số liệu của bạn sẽ khác một chút giữa các lần chạy (cột "Lý tưởng" thì cố định vì dùng hạt giống cố định).
 
 Khóa của Qiskit có dạng `q2 q1 q0`, nên $(x_1, x_2, x_3)$ là chuỗi bit đọc ngược (xem ghi chú về thứ tự bit ở Mục 6 Phần A).
 
-## 7. Nhiễu làm hỏng điều gì?
+## 7. Noise làm hỏng điều gì?
 
-- Mỗi cổng hai qubit (`cz`) có sai số lớn hơn nhiều so với cổng một qubit. Mạch của ta có 8 cổng `cz` sau transpile.
-- Độ sâu mạch càng lớn thì qubit càng bị decoherence trước khi đo xong.
-- Hệ quả thực tế: tăng số lớp $p$ của QAOA có thể cải thiện chất lượng trên giấy nhưng làm kết quả trên máy thật **tệ đi**. Đây chính là hạn chế của kỷ nguyên NISQ đã nhắc ở Mục 1 của bài báo.
+- Mỗi two-qubit gate (`cz`) có sai số lớn hơn nhiều so với single-qubit gate. Mạch của ta có 8 gate `cz` sau transpile.
+- Depth mạch càng lớn thì qubit càng bị decoherence trước khi đo xong.
+- Hệ quả thực tế: tăng số layer $p$ của QAOA có thể cải thiện chất lượng trên giấy nhưng làm kết quả trên máy thật **tệ đi**. Đây chính là hạn chế của kỷ nguyên NISQ đã nhắc ở Mục 1 của bài báo.
 
 ## 8. Xử lý sự cố
 

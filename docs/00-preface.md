@@ -6,7 +6,7 @@ Dành cho người đã quen với tối ưu tổ hợp (bài toán NP-hard, rà
 
 ## Cần biết trước
 
-- Đại số tuyến tính cơ bản (vector, ma trận, trị riêng).
+- Đại số tuyến tính cơ bản (vector, ma trận, eigenvalue).
 - Python cơ bản.
 - Không cần biết vật lý lượng tử; các khái niệm cần thiết được giới thiệu ở Phần A §2.
 

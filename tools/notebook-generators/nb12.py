@@ -46,7 +46,7 @@ Với $P = 7$ và các biến theo thứ tự $(x_1, x_2, x_3, z)$:
 
 $$f(x, z) = x_1 z - 2z - x_1 x_3 + x_2 + x_3 + P\,(x_2 x_3 - 2x_2 z - 2x_3 z + 3z).$$
 
-Ma trận $Q$ đối xứng nhận được bằng cách chia đôi hệ số của mỗi tích hai biến khác nhau vào hai vị trí $(j,k)$ và $(k,j)$.
+Ma trận $Q$ đối xứng nhận được bằng cách chia đôi coefficient của mỗi tích hai biến khác nhau vào hai vị trí $(j,k)$ và $(k,j)$.
 """),
 code(r"""
 P = 7
@@ -54,7 +54,7 @@ def f39(x1, x2, x3, z):
     return x1*z - 2*z - x1*x3 + x2 + x3 + P*(x2*x3 - 2*x2*z - 2*x3*z + 3*z)
 
 Q = np.zeros((4, 4))
-def add_pair(j, k, coef):            # hệ số của x_j x_k (j != k), chia đều cho (j,k) và (k,j)
+def add_pair(j, k, coef):            # coefficient của x_j x_k (j != k), chia đều cho (j,k) và (k,j)
     Q[j, k] += coef / 2; Q[k, j] += coef / 2
 # thứ tự biến: 0:x1, 1:x2, 2:x3, 3:z
 add_pair(0, 3, 1)                    # x1 z
@@ -74,7 +74,7 @@ print("J =\n", J)
 print("h =", h)
 """),
 md(r"""
-Cả hai sai số bằng 0: ma trận $Q$ và mô hình Ising thu được từ (8)–(11) cho đúng giá trị của hàm trong phương trình (39) ở cả 16 tổ hợp. Ghi chú: $J_{1,1}$ chứa toàn bộ hằng số của mô hình (nó chỉ dịch hàm mục tiêu, không đổi nghiệm tối ưu).
+Cả hai sai số bằng 0: ma trận $Q$ và mô hình Ising thu được từ (8)–(11) cho đúng giá trị của hàm trong phương trình (39) ở cả 16 tổ hợp. Ghi chú: $J_{1,1}$ chứa toàn bộ hằng số của mô hình (nó chỉ dịch hàm mục tiêu, không đổi optimal solution).
 """),
 ]
 save(nb1, "01-qubo-and-ising.ipynb")
@@ -82,7 +82,7 @@ save(nb1, "01-qubo-and-ising.ipynb")
 # ------------------------------------------------------------------ NB2
 nb2 = [
 md(r"""
-# Notebook 2: Biểu diễn lời giải và hàm mục tiêu
+# Notebook 2: Biểu diễn solution và hàm mục tiêu
 
 Đi kèm [Phần A, Mục 4.1–4.2](../../docs/A-translation/04-problem-transformation.md): Ví dụ 4, 5, 6 (biến nguyên), Ví dụ 9 (MAX-SAT), Ví dụ 10 (hàm số nguyên), Ví dụ 11 (tô màu đồ thị). Mọi kết quả đều được đối chiếu bằng duyệt vét cạn.
 """),
@@ -182,7 +182,7 @@ print("giá trị nhỏ nhất:", brute_force(f_poly, 3))
 md(r"""
 ## 4. Tô màu đồ thị: Ví dụ 7 và 11
 
-Đồ thị đường đi gồm 3 nút, các cạnh $(0,1)$ và $(1,2)$, với 3 màu. Hàm mục tiêu (28) là $\sum_{(j,k)\in E}\sum_{\ell} x_{j,\ell} x_{k,\ell}$, cộng hàm phạt one-hot $P\sum_j (\sum_\ell x_{j,\ell} - 1)^2$ cho ràng buộc (22).
+Đồ thị đường đi gồm 3 nút, các cạnh $(0,1)$ và $(1,2)$, với 3 màu. Hàm mục tiêu (28) là $\sum_{(j,k)\in E}\sum_{\ell} x_{j,\ell} x_{k,\ell}$, cộng penalty function one-hot $P\sum_j (\sum_\ell x_{j,\ell} - 1)^2$ cho ràng buộc (22).
 """),
 code(r"""
 nodes, edges, colors = 3, [(0, 1), (1, 2)], 3
@@ -199,13 +199,13 @@ print("P =", P)
 best, arg = brute_force(total, nodes*colors)
 def decode(x):
     return [x[j*colors:(j+1)*colors].index(1) for j in range(nodes)]
-print("giá trị nhỏ nhất:", best, "| số nghiệm tối ưu:", len(arg))
-assert all(sum(x[j*colors:(j+1)*colors]) == 1 for x in arg for j in range(nodes))        # mọi nghiệm tối ưu đều khả thi
+print("giá trị nhỏ nhất:", best, "| số optimal solution:", len(arg))
+assert all(sum(x[j*colors:(j+1)*colors]) == 1 for x in arg for j in range(nodes))        # mọi optimal solution đều feasible
 assert all(decode(x)[0] != decode(x)[1] and decode(x)[1] != decode(x)[2] for x in arg)
 print("ví dụ vài cách tô:", [decode(x) for x in arg[:4]])
 """),
 md(r"""
-Có $3 \cdot 2 \cdot 2 = 12$ cách tô hợp lệ cho đường đi 3 nút với 3 màu, và duyệt vét cạn trên 9 biến nhị phân cho đúng 12 nghiệm tối ưu, tất cả đều thỏa ràng buộc one-hot và không có hai nút kề nhau cùng màu.
+Có $3 \cdot 2 \cdot 2 = 12$ cách tô hợp lệ cho đường đi 3 nút với 3 màu, và duyệt vét cạn trên 9 biến nhị phân cho đúng 12 optimal solution, tất cả đều thỏa ràng buộc one-hot và không có hai nút kề nhau cùng màu.
 """),
 ]
 save(nb2, "02-binary-encoding-and-objective.ipynb")

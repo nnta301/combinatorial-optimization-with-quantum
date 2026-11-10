@@ -4,13 +4,13 @@ Trong mục này, chúng tôi giới thiệu hai bài toán tối ưu NP-hard s�
 
 ## 3.1 Tối ưu số nguyên có ràng buộc (Constrained Integer Optimization)
 
-Một *hàm số nguyên* (integer function) là hàm có đầu vào là một vector số nguyên và đầu ra là một giá trị nguyên, tức là $f : \mathbb{Z}^n \to \mathbb{Z}$. Trong công trình này, ta giả sử mình làm việc với các hàm số nguyên có thể viết dưới dạng đa thức có bậc tối đa $k$ (một hằng số). Điều này đảm bảo số số hạng tối đa trong biểu diễn đa thức của các hàm số nguyên là $O(n^k)$. Các đa thức này có thể viết dưới dạng gọn:
+Một *hàm số nguyên* (integer function) là hàm có đầu vào là một vector số nguyên và đầu ra là một giá trị nguyên, tức là $f : \mathbb{Z}^n \to \mathbb{Z}$. Trong công trình này, ta giả sử mình làm việc với các hàm số nguyên có thể viết dưới dạng polynomial có bậc tối đa $k$ (một hằng số). Điều này đảm bảo số term tối đa trong biểu diễn polynomial của các hàm số nguyên là $O(n^k)$. Các polynomial này có thể viết dưới dạng gọn:
 
 $$p(z) = \sum_{\substack{w \in \mathbb{Z}^n \\ |w| \le k}} a_w \prod_{j=1}^{n} z_j^{w_j}, \tag{12}$$
 
-trong đó $z_j$ là biến nguyên thứ $j$, và các hằng số $a_w$ là các hệ số của đa thức.
+trong đó $z_j$ là biến nguyên thứ $j$, và các hằng số $a_w$ là các coefficient của polynomial.
 
-Trong *tối ưu số nguyên có ràng buộc* (constrained integer optimization), mục tiêu là cực tiểu hóa một đa thức nguyên $p(z)$ thỏa một số ràng buộc dựa trên $m$ đa thức nguyên khác $q_j(z)$. Một cách hình thức, ta phát biểu bài toán như sau:
+Trong *tối ưu số nguyên có ràng buộc* (constrained integer optimization), mục tiêu là cực tiểu hóa một polynomial nguyên $p(z)$ thỏa một số ràng buộc dựa trên $m$ polynomial nguyên khác $q_j(z)$. Một cách hình thức, ta phát biểu bài toán như sau:
 
 $$\min\; p(z) \tag{13}$$
 
@@ -33,7 +33,7 @@ $$-5 \le z_j \le 5 \quad \forall j \in [5]$$
 
 $\square$
 
-> **Ghi chú người dịch:** Bài gốc nói "sáu ràng buộc" nhưng chỉ viết một bất đẳng thức đa thức và một dòng chặn miền cho cả năm biến. Con số sáu có thể hiểu là 1 ràng buộc đa thức cộng với 5 ràng buộc chặn miền (mỗi biến một ràng buộc dạng $-5 \le z_j \le 5$). Ví dụ này không được dùng lại ở các mục sau; các mục sau dùng Ví dụ 10 và 13–14.
+> **Ghi chú người dịch:** Bài gốc nói "sáu ràng buộc" nhưng chỉ viết một bất đẳng thức polynomial và một dòng chặn miền cho cả năm biến. Con số sáu có thể hiểu là 1 ràng buộc polynomial cộng với 5 ràng buộc chặn miền (mỗi biến một ràng buộc dạng $-5 \le z_j \le 5$). Ví dụ này không được dùng lại ở các mục sau; các mục sau dùng Ví dụ 10 và 13–14.
 
 ## 3.2 Maximum Satisfiability (MAX-SAT)
 

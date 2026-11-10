@@ -21,7 +21,7 @@ md(r"""
 
 Đi kèm [B-02: Hamiltonian và quantum annealing](../../docs/B-extensions/02-hamiltonian-and-annealing.md).
 
-Hai việc: (1) thấy tận mắt rằng Hamiltonian của bài toán $H_P$ chỉ là một ma trận đường chéo chứa các giá trị của hàm mục tiêu; (2) mô phỏng chính xác quá trình ủ $H(s) = (1-s)H_0 + sH_P$ cho bài toán của Ví dụ 10 (3 qubit, nghiệm tối ưu duy nhất), để thấy vai trò của *energy gap* và thời gian ủ $T$.
+Hai việc: (1) thấy tận mắt rằng Hamiltonian của bài toán $H_P$ chỉ là một diagonal matrix chứa các giá trị của hàm mục tiêu; (2) mô phỏng chính xác quá trình ủ $H(s) = (1-s)H_0 + sH_P$ cho bài toán của Ví dụ 10 (3 qubit, optimal solution duy nhất), để thấy vai trò của *energy gap* và thời gian ủ $T$.
 """),
 code(r"""
 import sys
@@ -36,7 +36,7 @@ cost = cost_vector(f_poly, 3)
 md(r"""
 ## 1. $H_P$ là bảng giá trị của hàm mục tiêu
 
-Với 3 biến nhị phân có $2^3 = 8$ lời giải. Hamiltonian $H_P$ là ma trận $8 \times 8$ đường chéo, phần tử thứ $i$ là $f(x)$ của lời giải thứ $i$. Cùng bảng đó có thể viết bằng toán tử Pauli-Z, như phương trình (43): $H_P = -2Z_1 - \tfrac{5}{2}Z_2 - \tfrac{9}{2}Z_1Z_2Z_3$.
+Với 3 biến nhị phân có $2^3 = 8$ solution. Hamiltonian $H_P$ là ma trận $8 \times 8$ đường chéo, phần tử thứ $i$ là $f(x)$ của solution thứ $i$. Cùng bảng đó có thể viết bằng operator Pauli-Z, như phương trình (43): $H_P = -2Z_1 - \tfrac{5}{2}Z_2 - \tfrac{9}{2}Z_1Z_2Z_3$.
 """),
 code(r"""
 Z = np.diag([1.0, -1.0]); I2 = np.eye(2)
@@ -56,12 +56,12 @@ for i in range(8):
     print(f" {i} |  {x[0]}  {x[1]}  {x[2]} | {cost[i]:5.0f}")
 """),
 md(r"""
-Điều này giải thích vì sao các cổng Pauli-Z là then chốt: chúng đường chéo trong computational basis, nên tổng và tích của chúng sinh ra đúng các Hamiltonian có dạng "bảng giá trị". Bài toán tối ưu trở thành: *tìm trạng thái có năng lượng thấp nhất của một ma trận đường chéo đã biết trước*. Nếu ta được phép đọc cả bảng thì việc này tầm thường; khó khăn là bảng có $2^n$ dòng.
+Điều này giải thích vì sao các Pauli-Z gate là then chốt: chúng đường chéo trong computational basis, nên tổng và tích của chúng sinh ra đúng các Hamiltonian có dạng "bảng giá trị". Bài toán tối ưu trở thành: *tìm state có energy thấp nhất của một diagonal matrix đã biết trước*. Nếu ta được phép đọc cả bảng thì việc này tầm thường; khó khăn là bảng có $2^n$ dòng.
 """),
 md(r"""
-## 2. Phổ năng lượng của $H(s) = (1-s)H_0 + sH_P$
+## 2. Phổ energy của $H(s) = (1-s)H_0 + sH_P$
 
-$H_0 = -\sum_j X_j$ có ground state là superposition đều $|{+}{+}{+}\rangle$ (dễ chuẩn bị). Khi $s$ tăng từ 0 đến 1, $H(s)$ đi từ $H_0$ đến $H_P$. Ta vẽ 8 mức năng lượng và tìm *energy gap* nhỏ nhất giữa mức thấp nhất và mức kế tiếp.
+$H_0 = -\sum_j X_j$ có ground state là superposition đều $|{+}{+}{+}\rangle$ (dễ chuẩn bị). Khi $s$ tăng từ 0 đến 1, $H(s)$ đi từ $H_0$ đến $H_P$. Ta vẽ 8 mức energy và tìm *energy gap* nhỏ nhất giữa mức thấp nhất và mức kế tiếp.
 """),
 code(r"""
 X = np.array([[0.0, 1.0], [1.0, 0.0]])
@@ -77,13 +77,13 @@ print(f"energy gap nhỏ nhất = {gap[k]:.3f} tại s = {ss[k]:.3f}   (gap ở 
 fig, ax = plt.subplots(figsize=(6, 3.6))
 ax.plot(ss, levels, lw=1.2)
 ax.axvline(ss[k], ls=":", c="gray")
-ax.set_xlabel("s"); ax.set_ylabel("năng lượng"); ax.set_title("Phổ năng lượng của H(s)")
+ax.set_xlabel("s"); ax.set_ylabel("energy"); ax.set_title("Phổ energy của H(s)")
 plt.tight_layout(); plt.show()
 """),
 md(r"""
-## 3. Xác suất đo được nghiệm tối ưu theo thời gian ủ $T$
+## 3. Measurement probability được optimal solution theo thời gian ủ $T$
 
-Ta tiến hóa $|\psi\rangle$ dưới $H(s)$ với $s = t/T$, rồi tính xác suất ở trạng thái $|000\rangle$ (nghiệm tối ưu, $f = -9$). $T$ nhỏ là ủ quá nhanh (không còn đoạn nhiệt); $T$ lớn thì hệ đi theo ground state.
+Ta tiến hóa $|\psi\rangle$ dưới $H(s)$ với $s = t/T$, rồi tính xác suất ở state $|000\rangle$ (optimal solution, $f = -9$). $T$ nhỏ là ủ quá nhanh (không còn adiabatic); $T$ lớn thì hệ đi theo ground state.
 """),
 code(r"""
 def anneal(T, per_unit=60, min_steps=300):
@@ -107,15 +107,15 @@ print("tham chiếu: chọn ngẫu nhiên đều cho P = 0.125 và E = 0")
 
 fig, ax = plt.subplots(figsize=(6, 3.4))
 ax.semilogx([r[0] for r in rows], [r[1] for r in rows], "o-")
-ax.axhline(1/8, ls=":", c="gray"); ax.set_xlabel("thời gian ủ T"); ax.set_ylabel("P(nghiệm tối ưu)")
+ax.axhline(1/8, ls=":", c="gray"); ax.set_xlabel("thời gian ủ T"); ax.set_ylabel("P(optimal solution)")
 plt.tight_layout(); plt.show()
 """),
 md(r"""
 Quan sát:
 
-- Với $T$ rất nhỏ, xác suất chỉ cao hơn ngẫu nhiên (0,125) một chút. Với $T$ vừa phải đã khá tốt dù chưa "đoạn nhiệt" thực sự. Điều này khớp với ghi chú ở Mục 2.2: quantum annealer *không bắt buộc* phải ở ground state suốt quá trình.
+- Với $T$ rất nhỏ, xác suất chỉ cao hơn ngẫu nhiên (0,125) một chút. Với $T$ vừa phải đã khá tốt dù chưa "adiabatic" thực sự. Điều này khớp với ghi chú ở Mục 2.2: quantum annealer *không bắt buộc* phải ở ground state suốt quá trình.
 - Xác suất đạt gần 1 khi $T$ cỡ hàng chục lần nghịch đảo của gap nhỏ nhất (ở đây gap nhỏ nhất khoảng 1,15). Đây là nội dung thực tế của adiabatic theorem: bài toán nào có gap nhỏ nhất đóng nhanh theo kích thước thì cần $T$ rất lớn.
-- Giá trị tuyệt đối của $T$ chỉ có nghĩa trong đơn vị năng lượng đang dùng: nếu nhân **cả** $H_0$ **và** $H_P$ với cùng một hằng số $\lambda$ thì kết quả giống hệt việc nhân $T$ với $\lambda$ (chỉ tích năng lượng × thời gian mới quan trọng). Vì thế khi so sánh các máy hay các bài toán, phải so $T$ theo cùng thang năng lượng.
+- Giá trị tuyệt đối của $T$ chỉ có nghĩa trong đơn vị energy đang dùng: nếu nhân **cả** $H_0$ **và** $H_P$ với cùng một hằng số $\lambda$ thì kết quả giống hệt việc nhân $T$ với $\lambda$ (chỉ tích energy × thời gian mới quan trọng). Vì thế khi so sánh các máy hay các bài toán, phải so $T$ theo cùng thang energy.
 """),
 ]
 save(nb1, "01-hamiltonian-and-annealing.ipynb")
@@ -123,11 +123,11 @@ save(nb1, "01-hamiltonian-and-annealing.ipynb")
 # ------------------------------------------------------------------ B2
 nb2 = [
 md(r"""
-# Notebook B2: Cảnh quan năng lượng và độ sâu của QAOA
+# Notebook B2: Landscape energy và depth của QAOA
 
-Đi kèm [B-06: QAOA, cảnh quan và độ sâu](../../docs/B-extensions/06-qaoa-landscape.md). Dùng bộ mô phỏng vector trạng thái chính xác `qaoa_state` trong `code/qco_utils.py` (không có nhiễu lấy mẫu), cho bài toán Ví dụ 10.
+Đi kèm [B-06: QAOA, landscape và depth](../../docs/B-extensions/06-qaoa-landscape.md). Dùng simulator state vector chính xác `qaoa_state` trong `code/qco_utils.py` (không có noise sampling), cho bài toán Ví dụ 10.
 
-Bộ mô phỏng này đã được đối chiếu với mạch Qiskit của Hình 9 (cùng tham số cho cùng phân phối xác suất).
+Simulator này đã được đối chiếu với mạch Qiskit của Hình 9 (cùng tham số cho cùng distribution xác suất).
 """),
 code(r"""
 import sys
@@ -141,33 +141,33 @@ cost = cost_vector(f_poly, 3)
 print("bảng f(x):", cost, "| tối ưu:", cost.min(), "tại chỉ số", int(cost.argmin()))
 """),
 md(r"""
-## 1. Cảnh quan $E(\gamma, \beta)$ khi $p = 1$
+## 1. Landscape $E(\gamma, \beta)$ khi $p = 1$
 
-Với $p=1$ ansatz chỉ có hai tham số. Ta tính $E(\gamma,\beta)$ trên lưới và vẽ bản đồ nhiệt. Vì $f$ nhận giá trị nguyên nên $E$ tuần hoàn theo $\gamma$ với chu kỳ $2\pi$.
+Với $p=1$ ansatz chỉ có hai tham số. Ta tính $E(\gamma,\beta)$ trên grid và vẽ bản đồ nhiệt. Vì $f$ nhận giá trị nguyên nên $E$ periodic theo $\gamma$ với chu kỳ $2\pi$.
 """),
 code(r"""
 gs = np.linspace(0, 2*np.pi, 241)
 bs = np.linspace(0, np.pi, 121)
 E = np.array([[qaoa_expectation(cost, [g], [b]) for g in gs] for b in bs])
 i, j = np.unravel_index(E.argmin(), E.shape)
-print(f"cực tiểu trên lưới: E = {E[i, j]:.3f} tại gamma = {gs[j]:.3f}, beta = {bs[i]:.3f}")
+print(f"cực tiểu trên grid: E = {E[i, j]:.3f} tại gamma = {gs[j]:.3f}, beta = {bs[i]:.3f}")
 
 fig, ax = plt.subplots(figsize=(7, 3.6))
 im = ax.imshow(E, origin="lower", aspect="auto", extent=[gs[0], gs[-1], bs[0], bs[-1]], cmap="viridis")
 ax.plot(gs[j], bs[i], "r*", ms=12)
 ax.set_xlabel("gamma"); ax.set_ylabel("beta"); ax.set_title("E(gamma, beta), p = 1")
 fig.colorbar(im, ax=ax, label="E"); plt.tight_layout(); plt.show()
-print("số điểm local minimum trên lưới (tính cả các bản sao do tính tuần hoàn và đối xứng):",
+print("số điểm local minimum trên grid (tính cả các bản sao do tính periodic và đối xứng):",
       int(sum(E[a, b] < min(E[a-1, b], E[a+1, b], E[a, b-1], E[a, b+1])
               for a in range(1, E.shape[0]-1) for b in range(1, E.shape[1]-1))))
 """),
 md(r"""
-Cảnh quan có nhiều "thung lũng" tách biệt, nên bộ tối ưu cổ điển (COBYLA, BFGS, ...) phụ thuộc điểm khởi đầu. Đây là khó khăn cốt lõi của các thuật toán biến phân, thường gọi là vấn đề *tối ưu tham số*.
+Landscape có nhiều "thung lũng" tách biệt, nên optimizer cổ điển (COBYLA, BFGS, ...) phụ thuộc điểm khởi đầu. Đây là khó khăn cốt lõi của các thuật toán variational, thường gọi là vấn đề *tối ưu tham số*.
 """),
 md(r"""
-## 2. Độ sâu $p$ và chất lượng nghiệm
+## 2. Depth $p$ và chất lượng nghiệm
 
-Với mỗi $p$, ta chạy BFGS từ nhiều điểm khởi đầu ngẫu nhiên rồi lấy kết quả tốt nhất. Cột `P(tối ưu)` là xác suất đo được $|000\rangle$.
+Với mỗi $p$, ta chạy BFGS từ nhiều điểm khởi đầu ngẫu nhiên rồi lấy kết quả tốt nhất. Cột `P(tối ưu)` là measurement probability được $|000\rangle$.
 """),
 code(r"""
 rng = np.random.default_rng(0)
@@ -191,12 +191,12 @@ for p, v, pr in table:
 print("tham chiếu: E tối ưu = -9, chọn ngẫu nhiên: E = 0 và P = 0.125")
 """),
 md(r"""
-Chất lượng tăng nhanh theo $p$; ở bài 3 qubit này, $p = 5$–$6$ đã gần như chắc chắn cho nghiệm tối ưu. Lưu ý đây là bài rất nhỏ và là mô phỏng không nhiễu. Trên máy thật, mỗi lớp thêm vào làm mạch sâu hơn nên nhiễu tăng, như đã thấy ở [Notebook C2](../C-hardware/02-ibm-quantum-qaoa.ipynb).
+Chất lượng tăng nhanh theo $p$; ở bài 3 qubit này, $p = 5$–$6$ đã gần như chắc chắn cho optimal solution. Lưu ý đây là bài rất nhỏ và là mô phỏng không noise. Trên máy thật, mỗi lớp thêm vào làm mạch sâu hơn nên noise tăng, như đã thấy ở [Notebook C2](../C-hardware/02-ibm-quantum-qaoa.ipynb).
 """),
 md(r"""
 ## 3. QAOA là phiên bản "rời rạc hóa" của quá trình ủ
 
-Nếu lấy $\gamma_k = s_k\,\Delta t$ và $\beta_k = -(1-s_k)\,\Delta t$ với $s_k = (k + \tfrac12)/p$ và $\Delta t = T/p$, thì QAOA độ sâu $p$ chính là xấp xỉ Trotter của quá trình ủ có thời gian $T$ ở [Notebook B1](01-hamiltonian-and-annealing.ipynb). Khi $p \to \infty$ với $T$ cố định, hai kết quả phải trùng nhau.
+Nếu lấy $\gamma_k = s_k\,\Delta t$ và $\beta_k = -(1-s_k)\,\Delta t$ với $s_k = (k + \tfrac12)/p$ và $\Delta t = T/p$, thì QAOA depth $p$ chính là xấp xỉ Trotter của quá trình ủ có thời gian $T$ ở [Notebook B1](01-hamiltonian-and-annealing.ipynb). Khi $p \to \infty$ với $T$ cố định, hai kết quả phải trùng nhau.
 """),
 code(r"""
 from scipy.linalg import eigh
@@ -224,7 +224,7 @@ for T in (4, 8):
         print(f"    QAOA p = {p:3d} với tham số 'ủ':  E = {e:7.3f}")
 """),
 md(r"""
-Với $p$ lớn, kết quả hội tụ về giá trị của quá trình ủ liên tục (các dao động nhỏ quanh giá trị đó là sai số Trotter). Còn khi **tối ưu tự do** các tham số (Mục 2), ở lần chạy này $p = 3$ đã đạt $E \approx -8{,}5$ và $p = 4$ đạt $E \approx -8{,}8$, tốt hơn quá trình ủ có $T = 8$ ($E \approx -8{,}4$) với độ sâu mạch nhỏ hơn nhiều so với $p = 32$ cần để QAOA "bắt chước" quá trình ủ đó. Đây là lý do QAOA hấp dẫn, nhưng cái giá là phải tối ưu $2p$ tham số bằng vòng lặp cổ điển (xem [B-07](../../docs/B-extensions/07-benchmarking.md)). Cần nhớ đây chỉ là một bài 3 qubit.
+Với $p$ lớn, kết quả hội tụ về giá trị của quá trình ủ liên tục (các dao động nhỏ quanh giá trị đó là sai số Trotter). Còn khi **tối ưu tự do** các tham số (Mục 2), ở lần chạy này $p = 3$ đã đạt $E \approx -8{,}5$ và $p = 4$ đạt $E \approx -8{,}8$, tốt hơn quá trình ủ có $T = 8$ ($E \approx -8{,}4$) với depth mạch nhỏ hơn nhiều so với $p = 32$ cần để QAOA "bắt chước" quá trình ủ đó. Đây là lý do QAOA hấp dẫn, nhưng cái giá là phải tối ưu $2p$ tham số bằng vòng lặp cổ điển (xem [B-07](../../docs/B-extensions/07-benchmarking.md)). Cần nhớ đây chỉ là một bài 3 qubit.
 """),
 ]
 save(nb2, "02-qaoa-landscape.ipynb")
@@ -232,11 +232,11 @@ save(nb2, "02-qaoa-landscape.ipynb")
 # ------------------------------------------------------------------ B3
 nb3 = [
 md(r"""
-# Notebook B3: Hằng số phạt $P$ trong bài toán knapsack
+# Notebook B3: Penalty constant $P$ trong bài toán knapsack
 
-Đi kèm [B-04: Hàm phạt và cách mã hóa](../../docs/B-extensions/04-penalties-and-encodings.md).
+Đi kèm [B-04: Penalty function và cách mã hóa](../../docs/B-extensions/04-penalties-and-encodings.md).
 
-Ta lấy bài toán knapsack 8 vật, rồi biến thành QUBO bằng chính quy trình ở Mục 4 của bài báo (biến nhị phân, ràng buộc bất đẳng thức → đẳng thức bằng biến slack, hàm phạt $P(\cdot)^2$). Sau đó khảo sát: (a) $P$ nhỏ nhất để QUBO còn đúng, (b) $P$ tác động ra sao đến việc tìm nghiệm bằng simulated annealing, (c) so với công thức (36) của bài báo.
+Ta lấy bài toán knapsack 8 vật, rồi biến thành QUBO bằng chính quy trình ở Mục 4 của bài báo (biến nhị phân, ràng buộc bất đẳng thức → đẳng thức bằng biến slack, penalty function $P(\cdot)^2$). Sau đó khảo sát: (a) $P$ nhỏ nhất để QUBO còn đúng, (b) $P$ tác động ra sao đến việc tìm nghiệm bằng simulated annealing, (c) so với công thức (36) của bài báo.
 """),
 code(r"""
 import itertools, sys, warnings
@@ -266,7 +266,7 @@ Cực tiểu hóa $-\sum_i v_i x_i + P\left(\sum_i w_i x_i + s - W\right)^2$, v�
 """),
 code(r"""
 a, slack_w = integer_encoding(0, W)
-print("trọng số của slack:", slack_w, "->", len(slack_w), "biến phụ (mã hóa nhị phân)")
+print("trọng số của slack:", slack_w, "->", len(slack_w), "auxiliary variable (mã hóa nhị phân)")
 xs = [f"x{i}" for i in range(n)]
 ts = [f"s{j}" for j in range(len(slack_w))]
 
@@ -288,7 +288,7 @@ def decode(sample):
 md(r"""
 ## 2. $P$ nhỏ nhất để QUBO còn đúng
 
-Với từng $P$, ta duyệt vét cạn cả 13 biến nhị phân ($2^{13} = 8192$ trạng thái) và kiểm tra: mọi trạng thái năng lượng thấp nhất có khả thi và có giá trị đúng bằng tối ưu hay không.
+Với từng $P$, ta duyệt vét cạn cả 13 biến nhị phân ($2^{13} = 8192$ state) và kiểm tra: mọi state energy thấp nhất có feasible và có giá trị đúng bằng tối ưu hay không.
 """),
 code(r"""
 def exact_is_correct(P):
@@ -298,12 +298,12 @@ def exact_is_correct(P):
 
 grid = [0.25, 0.5, 1, 1.5, 2, 2.5, 3, 4, 5, 8, 16, 71, 160]
 for P in grid:
-    print(f"P = {P:6}: QUBO đúng (mọi nghiệm cực tiểu đều khả thi và tối ưu)? {exact_is_correct(P)}")
+    print(f"P = {P:6}: QUBO đúng (mọi nghiệm cực tiểu đều feasible và tối ưu)? {exact_is_correct(P)}")
 """),
 code(r"""
 for P in np.arange(0.1, 6.0, 0.1):
     if exact_is_correct(P):
-        print(f"P nhỏ nhất (lưới 0.1) làm QUBO đúng: ~{P:.1f}")
+        print(f"P nhỏ nhất (grid 0.1) làm QUBO đúng: ~{P:.1f}")
         break
 print("P theo công thức (36) áp dụng cho phần mục tiêu:", 1 + int(values.sum()))
 """),
@@ -313,9 +313,9 @@ Công thức (36) cho $P = 1 + \sum_i v_i$, lớn hơn rất nhiều so với m�
 md(r"""
 ## 3. $P$ tác động thế nào đến việc tìm nghiệm bằng annealing?
 
-Ta dùng một simulated annealing cổ điển tự viết (chạy song song nhiều lần bằng numpy) thay cho phần cứng. Lịch nhiệt độ **tự co giãn theo thang năng lượng của QUBO**, giống cách các solver thật làm: nhiệt độ đầu đủ cao để lật được spin tốn năng lượng lớn nhất, nhiệt độ cuối đủ thấp để phân biệt hệ số nhỏ nhất. Hệ quả: khi $P$ rất lớn, các hệ số lớn kéo nhiệt độ đầu lên cao, và phần lớn thời gian ủ bị lãng phí ở vùng quá nóng đối với phần mục tiêu thật.
+Ta dùng một simulated annealing cổ điển tự viết (chạy song song nhiều lần bằng numpy) thay cho phần cứng. Lịch nhiệt độ **tự co giãn theo thang energy của QUBO**, giống cách các solver thật làm: nhiệt độ đầu đủ cao để lật được spin tốn energy lớn nhất, nhiệt độ cuối đủ thấp để phân biệt coefficient nhỏ nhất. Hệ quả: khi $P$ rất lớn, các coefficient lớn kéo nhiệt độ đầu lên cao, và phần lớn thời gian ủ bị lãng phí ở vùng quá nóng đối với phần mục tiêu thật.
 
-Với mỗi $P$, ta đo (a) tỉ lệ lần chạy cho ra lời giải **khả thi**, (b) tỉ lệ cho ra lời giải **khả thi và tối ưu**, cả hai tính trên $x$ đã giải mã (bỏ biến slack).
+Với mỗi $P$, ta đo (a) tỉ lệ lần chạy cho ra solution **feasible**, (b) tỉ lệ cho ra solution **feasible và tối ưu**, cả hai tính trên $x$ đã giải mã (bỏ biến slack).
 """),
 code(r"""
 coef = np.concatenate([weights, slack_w]).astype(float)
@@ -353,7 +353,7 @@ def report(P, sweeps):
 
 for sweeps in (100, 400):
     print(f"sweeps = {sweeps}")
-    print("      P    khả thi   khả thi và tối ưu   thang năng lượng (max|hệ số| / giá trị nhỏ nhất)")
+    print("      P    feasible   feasible và tối ưu   thang energy (max|coefficient| / giá trị nhỏ nhất)")
     for P in (0.5, 1, 1.5, 2, 4, 8, 16, 40, 71, 160, 1000):
         f_, g_, sc = report(P, sweeps)
         print(f"  {P:6}     {f_:5.2f}          {g_:5.2f}                 {sc:9.1f}")
@@ -361,11 +361,11 @@ for sweeps in (100, 400):
 md(r"""
 Đọc kết quả (hai mức sweep cho cùng xu hướng):
 
-- **Tỉ lệ khả thi tăng theo $P$**: ở $P = 0{,}5$ chưa đến một nửa lần chạy khả thi, còn từ $P \approx 8$ trở lên gần như luôn khả thi. Ràng buộc càng bị phạt nặng thì càng được tuân thủ.
-- **Tỉ lệ "khả thi và tối ưu" giảm đơn điệu theo $P$**: từ khoảng 0,25–0,45 ở $P \lesssim 1$ (tùy số sweep) xuống gần 0 từ $P \approx 16$. Lý do: khi $P$ lớn, bộ ủ vừa tốn nhiệt độ vào phần quá nóng, vừa bị giam trong một vùng khả thi mà các nghiệm khả thi khác nhau cách nhau bởi rào cản năng lượng rất cao, nên khó chuyển từ nghiệm khả thi kém sang nghiệm khả thi tốt hơn.
-- Điểm tốt nhất nằm **gần ngưỡng $P^* \approx 1{,}1$** tìm được ở Mục 2 (thậm chí hơi dưới ngưỡng, vì một số lần chạy không cần QUBO đúng để cho lời giải khả thi tốt). Giá trị $P = 71$ của công thức (36) cho gần như 0% thành công trong thí nghiệm này, dù QUBO tương ứng hoàn toàn đúng về mặt toán học.
+- **Tỉ lệ feasible tăng theo $P$**: ở $P = 0{,}5$ chưa đến một nửa lần chạy feasible, còn từ $P \approx 8$ trở lên gần như luôn feasible. Ràng buộc càng bị phạt nặng thì càng được tuân thủ.
+- **Tỉ lệ "feasible và tối ưu" giảm đơn điệu theo $P$**: từ khoảng 0,25–0,45 ở $P \lesssim 1$ (tùy số sweep) xuống gần 0 từ $P \approx 16$. Lý do: khi $P$ lớn, bộ ủ vừa tốn nhiệt độ vào phần quá nóng, vừa bị giam trong một vùng feasible mà các nghiệm feasible khác nhau cách nhau bởi rào cản energy rất cao, nên khó chuyển từ nghiệm feasible kém sang nghiệm feasible tốt hơn.
+- Điểm tốt nhất nằm **gần ngưỡng $P^* \approx 1{,}1$** tìm được ở Mục 2 (thậm chí hơi dưới ngưỡng, vì một số shots không cần QUBO đúng để cho solution feasible tốt). Giá trị $P = 71$ của công thức (36) cho gần như 0% thành công trong thí nghiệm này, dù QUBO tương ứng hoàn toàn đúng về mặt toán học.
 
-Cần lưu ý: đây là một thể hiện knapsack nhỏ và một sampler cổ điển, nên số cụ thể sẽ khác trên phần cứng và bài toán khác. Điều đáng mang đi là **bản chất đánh đổi** (khả thi so với chất lượng) và việc công thức (36) là cận an toàn về tính đúng đắn của QUBO, không phải lựa chọn tốt về hiệu năng.
+Cần lưu ý: đây là một thể hiện knapsack nhỏ và một sampler cổ điển, nên số cụ thể sẽ khác trên phần cứng và bài toán khác. Điều đáng mang đi là **bản chất đánh đổi** (feasible so với chất lượng) và việc công thức (36) là cận an toàn về tính đúng đắn của QUBO, không phải lựa chọn tốt về hiệu năng.
 """),
 md(r"""
 ## 4. Số biến theo cách mã hóa slack
@@ -431,9 +431,9 @@ md(r"""
 Số qubit vật lý tăng nhanh hơn tuyến tính theo $n$, và chain dài hơn nhiều trên Chimera so với Pegasus/Zephyr vì mỗi qubit chỉ nối được tối đa 6 qubit khác (bậc 6, so với 15 và 20). Đây là lý do độ kết nối của topology quan trọng, và là lý do các bài toán dày bị giới hạn ở kích thước nhỏ hơn rất nhiều so với tổng số qubit.
 """),
 md(r"""
-## 2. Đồ thị thưa: 3-regular ngẫu nhiên
+## 2. Đồ thị sparse: 3-regular ngẫu nhiên
 
-Nhiều bài toán tối ưu tổ hợp thực tế (ví dụ Max-Cut trên đồ thị thưa) có đồ thị bậc nhỏ, và nhúng dễ hơn nhiều.
+Nhiều bài toán tối ưu tổ hợp thực tế (ví dụ Max-Cut trên đồ thị sparse) có đồ thị bậc nhỏ, và nhúng dễ hơn nhiều.
 """),
 code(r"""
 print("Nhúng đồ thị 3-regular ngẫu nhiên; mỗi ô: (tổng qubit vật lý, chain dài nhất)")
@@ -448,7 +448,7 @@ for name, G in topologies.items():
     print(f"{name:12s}" + "".join(f"{c:<15s}" for c in cells))
 """),
 md(r"""
-Đồ thị thưa với hàng trăm biến vẫn nhúng được: trên Pegasus và Zephyr chain dài tối đa 5 ở $n = 256$ (Chimera cần chain tới 15), trong khi $K_{32}$ đã cần 339 qubit trên Chimera. Kết luận thực tế: **cấu trúc đồ thị của QUBO quyết định bài toán có vừa với máy hay không**, quan trọng hơn cả số biến.
+Đồ thị sparse với hàng trăm biến vẫn nhúng được: trên Pegasus và Zephyr chain dài tối đa 5 ở $n = 256$ (Chimera cần chain tới 15), trong khi $K_{32}$ đã cần 339 qubit trên Chimera. Kết luận thực tế: **cấu trúc đồ thị của QUBO quyết định bài toán có vừa với máy hay không**, quan trọng hơn cả số biến.
 
 Lưu ý: `find_embedding` là heuristic ngẫu nhiên, nên số liệu có thể thay đổi chút ít theo hạt giống; đây là các cận trên của một lần thử, không phải nhúng tối ưu (bài toán minor-embedding là NP-hard như bài báo nêu).
 """),
@@ -487,7 +487,7 @@ for n_cities in (4, 6, 8, 10, 12):
     print(f"{n_cities:2d}  {H.number_of_nodes():8d}  {max_deg:9d}   | " + " | ".join(f"{c:22s}" for c in cells))
 """),
 md(r"""
-Mỗi biến logic của TSP có bậc cỡ $4(n-1)$, vượt xa bậc tối đa của các qubit (6, 15, 20). Vì vậy bài toán đã cần chain dài và tổng số qubit vật lý lớn hơn rất nhiều số biến logic $n^2$, ngay từ các thể hiện rất nhỏ. Ở đây $n = 12$ thành phố (144 biến logic) đã chiếm khoảng 2000 qubit trên Pegasus P16, và heuristic không tìm được nhúng nào cho $n \ge 10$ trên Chimera C16 trong thời hạn đặt ra (kết quả "không tìm được" nghĩa là heuristic thất bại trong thời hạn, chưa phải chứng minh không tồn tại nhúng). Tốc độ tăng này gợi ý rằng TSP cỡ vài chục thành phố sẽ vượt quá khả năng của một chip đơn lẻ nếu mã hóa trực tiếp theo cách này; đó là ngoại suy thô từ các điểm $n \le 12$, không phải phép đo.
+Mỗi biến logic của TSP có bậc cỡ $4(n-1)$, vượt xa bậc tối đa của các qubit (6, 15, 20). Vì vậy bài toán đã cần chain dài và tổng số qubit vật lý lớn hơn rất nhiều số biến logic $n^2$, ngay từ các thể hiện rất nhỏ. Ở đây $n = 12$ thành phố (144 biến logic) đã chiếm khoảng 2000 qubit trên Pegasus P16, và heuristic không tìm được nhúng nào cho $n \ge 10$ trên Chimera C16 trong thời hạn đặt ra (kết quả "không tìm được" nghĩa là heuristic thất bại trong thời hạn, chưa phải chứng minh không tồn tại nhúng). Tốc độ tăng này gợi ý rằng TSP cỡ vài chục thành phố sẽ vượt quá khả năng của một chip đơn lẻ nếu mã hóa trực tiếp theo cách này; đó là ngoại suy thô từ các điểm $n \le 12$, không phải measurement.
 """),
 ]
 save(nb4, "04-embedding-scaling.ipynb")
@@ -499,7 +499,7 @@ md(r"""
 
 Đi kèm [B-07: Benchmark công bằng và tài liệu đọc thêm](../../docs/B-extensions/07-benchmarking.md).
 
-Đây là một **thí nghiệm đồ chơi** để minh họa *cách đếm chi phí*, không phải bằng chứng về lợi thế của bên nào. Ta lấy các thể hiện Ising ngẫu nhiên $n = 10$ spin, và so sánh simulated annealing (SA) với QAOA mô phỏng chính xác về: xác suất tìm được nghiệm tối ưu của một lần chạy, thời gian-tới-lời-giải TTS, và chi phí vòng tối ưu tham số của QAOA.
+Đây là một **thí nghiệm đồ chơi** để minh họa *cách đếm chi phí*, không phải bằng chứng về lợi thế của bên nào. Ta lấy các thể hiện Ising ngẫu nhiên $n = 10$ spin, và so sánh simulated annealing (SA) với QAOA mô phỏng chính xác về: xác suất tìm được optimal solution của một lần chạy, thời gian-tới-lời-giải TTS, và chi phí vòng tối ưu tham số của QAOA.
 """),
 code(r"""
 import sys, time
@@ -524,7 +524,7 @@ def energies_table(J):
 
 J = random_instance()
 E = energies_table(J)
-print("thể hiện mẫu: E nhỏ nhất =", round(E.min(), 3), "| số nghiệm tối ưu (suy biến spin-flip):", int((np.abs(E - E.min()) < 1e-9).sum()))
+print("thể hiện mẫu: E nhỏ nhất =", round(E.min(), 3), "| số optimal solution (suy biến spin-flip):", int((np.abs(E - E.min()) < 1e-9).sum()))
 """),
 md(r"""
 ## 1. Simulated annealing: xác suất thành công theo số sweep
@@ -547,12 +547,12 @@ def sa_success(J, E_min, sweeps, reads=2000, beta0=0.1, beta1=3.0, seed=0):
 
 E_min = E.min()
 for sweeps in (5, 10, 20, 50, 100):
-    print(f"sweeps = {sweeps:3d}: P(một lần chạy ra nghiệm tối ưu) = {sa_success(J, E_min, sweeps):.3f}")
+    print(f"sweeps = {sweeps:3d}: P(một lần chạy ra optimal solution) = {sa_success(J, E_min, sweeps):.3f}")
 """),
 md(r"""
-## 2. QAOA mô phỏng chính xác: xác suất thành công theo độ sâu $p$
+## 2. QAOA mô phỏng chính xác: xác suất thành công theo depth $p$
 
-Ta tối ưu $2p$ tham số bằng BFGS từ vài điểm khởi đầu ngẫu nhiên, và đếm **số lần gọi hàm mục tiêu** (`nfev`) mà bộ tối ưu cần. Trên phần cứng thật, mỗi lần gọi hàm mục tiêu là một đợt đo nhiều shots.
+Ta tối ưu $2p$ tham số bằng BFGS từ vài điểm khởi đầu ngẫu nhiên, và đếm **số lần gọi hàm mục tiêu** (`nfev`) mà optimizer cần. Trên phần cứng thật, mỗi lần gọi hàm mục tiêu là một đợt đo nhiều shots.
 """),
 code(r"""
 def qaoa_best(E, p, starts=6, seed=0):
@@ -572,16 +572,16 @@ def qaoa_best(E, p, starts=6, seed=0):
 t0 = time.time()
 for p in (1, 2, 3):
     ps, nfev = qaoa_best(E, p)
-    print(f"p = {p}: P(thành công) = {ps:.3f} | số lần gọi hàm mục tiêu của bộ tối ưu (6 điểm khởi đầu) = {nfev}")
+    print(f"p = {p}: P(thành công) = {ps:.3f} | số lần gọi hàm mục tiêu của optimizer (6 điểm khởi đầu) = {nfev}")
 print(f"({time.time() - t0:.0f} giây)")
 """),
 md(r"""
 ## 3. Thời gian-tới-lời-giải (TTS) và chi phí ẩn
 
-Nếu một lần chạy thành công với xác suất $p_s$, số lần chạy cần để có xác suất thành công $\ge 99\%$ là
+Nếu một lần chạy thành công với xác suất $p_s$, số shots cần để có xác suất thành công $\ge 99\%$ là
 $$R_{99} = \left\lceil \frac{\ln(1 - 0.99)}{\ln(1 - p_s)} \right\rceil .$$
 
-Với SA, chi phí là $R_{99} \times \text{sweeps} \times n$ lần cập nhật spin. Với QAOA, có hai phần: (a) $R_{99}$ shots để lấy mẫu với tham số đã tối ưu, và (b) **chi phí tối ưu tham số** = số lần gọi hàm mục tiêu × số shots mỗi lần gọi. Phần (b) thường chiếm đa số nhưng hay bị bỏ qua khi báo cáo.
+Với SA, chi phí là $R_{99} \times \text{sweeps} \times n$ lần cập nhật spin. Với QAOA, có hai phần: (a) $R_{99}$ shots để sampling với tham số đã tối ưu, và (b) **chi phí tối ưu tham số** = số lần gọi hàm mục tiêu × số shots mỗi lần gọi. Phần (b) thường chiếm đa số nhưng hay bị bỏ qua khi báo cáo.
 """),
 code(r"""
 import math
@@ -606,15 +606,15 @@ for p in (1, 2, 3):
     shots_final = r99(ps_med)
     shots_opt = nfev_med * SHOTS_PER_EVAL
     print(f"QAOA p = {p}: P thành công trung vị {ps_med:.3f} (thấp nhất {min(ps_list):.3f}, cao nhất {max(ps_list):.3f})")
-    print(f"           shots lấy mẫu cuối R99 = {shots_final:6d} | shots cho vòng tối ưu ~ {int(shots_opt):9d} ({nfev_med:.0f} lần gọi x {SHOTS_PER_EVAL})")
+    print(f"           shots sampling cuối R99 = {shots_final:6d} | shots cho vòng tối ưu ~ {int(shots_opt):9d} ({nfev_med:.0f} lần gọi x {SHOTS_PER_EVAL})")
 """),
 md(r"""
 ## 4. Đọc kết quả thế nào cho đúng
 
-- Chi phí **vòng tối ưu tham số** của QAOA (hàng trăm nghìn shots ở trên) lớn hơn rất nhiều so với $R_{99}$ shots lấy mẫu cuối. Nếu chỉ tính $R_{99}$ thì sẽ đánh giá thấp chi phí thực. Ngược lại, SA không có vòng ngoài này.
+- Chi phí **vòng tối ưu tham số** của QAOA (hàng trăm nghìn shots ở trên) lớn hơn rất nhiều so với $R_{99}$ shots sampling cuối. Nếu chỉ tính $R_{99}$ thì sẽ đánh giá thấp chi phí thực. Ngược lại, SA không có vòng ngoài này.
 - Đơn vị chi phí không so sánh trực tiếp được: "lần cập nhật spin" trên CPU và "shot" trên QPU có thời gian thực khác nhau nhiều bậc. Muốn so sánh nghiêm túc phải dùng **thời gian thực end-to-end** trên phần cứng cụ thể, gồm cả biên dịch, hàng đợi, chuyển dữ liệu.
 - Đây là bài $n = 10$ rất nhỏ nên SA chỉ cần vài sweep đã có xác suất thành công đáng kể; không thể suy ra gì về bài lớn. Chỉ có phần *cách đếm* là đáng mang đi.
-- Số lần gọi hàm mục tiêu (`nfev`) phụ thuộc bộ tối ưu: BFGS ước lượng gradient bằng sai phân hữu hạn nên tốn $2p+1$ lần gọi cho mỗi bước. Bộ tối ưu không dùng gradient (như COBYLA) hay kỹ thuật khởi tạo tham số thông minh sẽ cho số khác, nhưng thường vẫn ở cỡ hàng trăm đến hàng nghìn lần gọi. Cả SA lẫn QAOA ở đây đều chưa được tinh chỉnh.
+- Số lần gọi hàm mục tiêu (`nfev`) phụ thuộc optimizer: BFGS ước lượng gradient bằng sai phân hữu hạn nên tốn $2p+1$ lần gọi cho mỗi bước. Optimizer không dùng gradient (như COBYLA) hay kỹ thuật khởi tạo tham số thông minh sẽ cho số khác, nhưng thường vẫn ở cỡ hàng trăm đến hàng nghìn lần gọi. Cả SA lẫn QAOA ở đây đều chưa được tinh chỉnh.
 - Các nguyên tắc benchmark đầy đủ nằm ở [B-07](../../docs/B-extensions/07-benchmarking.md).
 """),
 ]
