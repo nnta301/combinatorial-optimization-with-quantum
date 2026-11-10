@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 170" width="320" height="170" font-family="serif" font-size="13">
+  <rect width="320" height="170" fill="#ffffff"/>
+  <g stroke="#000" fill="none">
+    <line x1="50" y1="35" x2="290" y2="35"/>
+    <line x1="50" y1="85" x2="290" y2="85"/>
+    <line x1="50" y1="135" x2="290" y2="135"/>
+    <rect x="110" y="21" width="90" height="28" fill="#fff"/>
+    <rect x="110" y="71" width="90" height="28" fill="#fff"/>
+    <rect x="110" y="121" width="90" height="28" fill="#fff"/>
+  </g>
+  <g text-anchor="middle" font-style="italic">
+    <text x="155" y="40">RX(2βₖ)</text>
+    <text x="155" y="90">RX(2βₖ)</text>
+    <text x="155" y="140">RX(2βₖ)</text>
+  </g>
+  <text x="30" y="40" text-anchor="end" font-style="italic">q₁</text>
+  <text x="30" y="90" text-anchor="end" font-style="italic">q₂</text>
+  <text x="30" y="140" text-anchor="end" font-style="italic">q₃</text>
+</svg>

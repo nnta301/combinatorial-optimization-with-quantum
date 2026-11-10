@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 190" width="520" height="190" font-family="serif" font-size="13">
+  <rect width="520" height="190" fill="#ffffff"/>
+  <g stroke="#000" fill="none">
+    <line x1="50" y1="40" x2="490" y2="40"/>
+    <line x1="50" y1="90" x2="490" y2="90"/>
+    <line x1="50" y1="140" x2="490" y2="140"/>
+    <!-- RZ boxes -->
+    <rect x="80" y="26" width="90" height="28" fill="#fff"/>
+    <rect x="80" y="76" width="90" height="28" fill="#fff"/>
+    <rect x="290" y="126" width="90" height="28" fill="#fff"/>
+    <!-- CNOT 1: q1 -> q2 -->
+    <line x1="205" y1="40" x2="205" y2="98"/>
+    <circle cx="205" cy="90" r="8" fill="#fff"/><line x1="197" y1="90" x2="213" y2="90"/>
+    <!-- CNOT 2: q2 -> q3 -->
+    <line x1="250" y1="90" x2="250" y2="148"/>
+    <circle cx="250" cy="140" r="8" fill="#fff"/><line x1="242" y1="140" x2="258" y2="140"/>
+    <!-- CNOT 3: q2 -> q3 -->
+    <line x1="415" y1="90" x2="415" y2="148"/>
+    <circle cx="415" cy="140" r="8" fill="#fff"/><line x1="407" y1="140" x2="423" y2="140"/>
+    <!-- CNOT 4: q1 -> q2 -->
+    <line x1="455" y1="40" x2="455" y2="98"/>
+    <circle cx="455" cy="90" r="8" fill="#fff"/><line x1="447" y1="90" x2="463" y2="90"/>
+  </g>
+  <g fill="#000">
+    <circle cx="205" cy="40" r="4"/><circle cx="250" cy="90" r="4"/><circle cx="415" cy="90" r="4"/><circle cx="455" cy="40" r="4"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="125" y="45" font-style="italic">RZ(−4γₖ)</text>
+    <text x="125" y="95" font-style="italic">RZ(−5γₖ)</text>
+    <text x="335" y="145" font-style="italic">RZ(−9γₖ)</text>
+  </g>
+  <text x="30" y="45" text-anchor="end" font-style="italic">q₁</text>
+  <text x="30" y="95" text-anchor="end" font-style="italic">q₂</text>
+  <text x="30" y="145" text-anchor="end" font-style="italic">q₃</text>
+</svg>

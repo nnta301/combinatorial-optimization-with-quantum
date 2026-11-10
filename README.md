@@ -18,7 +18,7 @@ Bản PDF gốc nằm ở [references/2412.15778v2.pdf](references/2412.15778v2.
 
 Notebook tương ứng nằm trong [notebooks/](notebooks/); mã dùng chung trong [code/](code/). Bảng thuật ngữ Anh–Việt: [docs/glossary.md](docs/glossary.md).
 
-Quy ước: nội dung trong khung **Ghi chú người dịch** là của người biên soạn, không phải của tác giả gốc.
+Quy ước: nội dung trong khung **Ghi chú người dịch** là của người biên soạn, không phải của tác giả gốc. Khung **Đã sửa so với bài gốc** đánh dấu những chỗ bản dịch đã sửa lỗi của bài gốc, kèm giải thích.
 
 ## Lộ trình đọc
 

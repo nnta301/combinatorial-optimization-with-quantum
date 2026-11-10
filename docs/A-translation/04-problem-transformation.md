@@ -172,9 +172,10 @@ Thay vì tính $\min h(x)$, ta tính một cận dưới của $h$ bằng cùng 
 
 $$P = 1 + \sum_{\substack{S \subseteq [n] \\ S \neq \emptyset}} |a_S| = 1 + |13| + |14| + |9| + |-18| + |-18| + |-18| + |36| = 127. \tag{38}$$
 
-Cuối cùng ta có thể viết biểu thức cần cực đại hóa, bao gồm biểu thức phạt, là $f'(x, t) = f(x) + P\,(h(x) + s)^2$. $\square$
+Cuối cùng ta có thể viết biểu thức cần cực tiểu hóa, bao gồm biểu thức phạt, là $f'(x, t) = f(x) + P\,(h(x) + s)^2$. $\square$
 
-> **Ghi chú người dịch:**
-> - **"Cực đại hóa" ở cuối Ví dụ 14** là lỗi của bài gốc; theo quy ước của bài ($f$ được cực tiểu hóa, và $P(h+s)^2 \ge 0$ chỉ làm tăng giá trị của lời giải infeasible), biểu thức $f'$ cần được **cực tiểu hóa**.
+> **Đã sửa so với bài gốc (cuối Ví dụ 14):** Bài gốc viết "biểu thức cần **cực đại hóa**". Đây là lỗi: theo quy ước của bài, hàm mục tiêu được cực tiểu hóa, và số hạng phạt $P(h+s)^2 \ge 0$ chỉ làm tăng giá trị của các lời giải infeasible. Vì vậy $f'$ phải được **cực tiểu hóa**. Bản dịch đã sửa thành "cực tiểu hóa".
+>
+> **Ghi chú người dịch (nhận xét thêm, không sửa gì trong bài):**
 > - **Cận dưới của $h$ khá lỏng.** Tính trên cả 8 tổ hợp, giá trị nhỏ nhất thực của $h$ là $-6$ (tại $z = 1$), không phải $-24$. Cận dùng được và an toàn, nhưng đòi hỏi 5 biến phụ; nếu dùng giá trị nhỏ nhất thực thì chỉ cần $s \in [0, 6]$, tức 3 biến phụ. Đây là đánh đổi giữa việc tính cận nhanh (thời gian đa thức) và số qubit cần dùng. Xem thêm Phần B (sẽ viết).
 > - Tương tự, $P = 127$ là một giá trị *đủ lớn* chứ không phải tối thiểu: trên 8 tổ hợp, $f$ chỉ dao động từ $-9$ đến $9$ (độ rộng 18), trong khi $ub(f) - lb(f) = 63 - (-63) = 126$ theo công thức (34)–(35).
