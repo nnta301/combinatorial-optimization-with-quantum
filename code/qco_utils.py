@@ -74,7 +74,14 @@ def integer_encoding(a, c):
 
     Trả về (a, weights) sao cho z = a + sum_j weights[j] * x_{j+1}. Các trọng số là
     1, 2, 4, ..., 2^(n-2) và trọng số cuối 2^(n-1) - b (phương trình (20)).
+
+    Trường hợp suy biến c == a (miền chỉ có một giá trị): z là hằng số, không cần biến
+    nhị phân nào nên trả về (a, []).
     """
+    if c < a:
+        raise ValueError(f"miền rỗng: c = {c} nhỏ hơn a = {a}")
+    if c == a:
+        return a, []
     n = max(1, math.ceil(math.log2(c - a + 1)))
     b = 2**n - 1 - (c - a)
     weights = [2**j for j in range(n - 1)] + [2 ** (n - 1) - b]

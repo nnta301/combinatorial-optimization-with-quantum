@@ -27,7 +27,7 @@ Mình **chưa xác minh được trang gói chính thức ở thời điểm hi�
 pip install dwave-ocean-sdk
 ```
 
-Bản đã dùng để kiểm tra các lệnh trong tài liệu này: `dwave-system` 1.36.0, `dimod` 0.12.23 (tháng 11/2026).
+Bản đã dùng để kiểm tra các lệnh trong tài liệu này: `dwave-system` 1.36.0, `dimod` 0.12.22 (tháng 11/2026).
 
 ## 3. Cấu hình token
 

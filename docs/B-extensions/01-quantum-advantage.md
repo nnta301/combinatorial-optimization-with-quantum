@@ -20,7 +20,7 @@ Một tuyên bố nghe rất mạnh thường chỉ đúng với một tổ hợ
 
 ## 2. Điều đã biết về mặt lý thuyết
 
-**a) Chồng chập không có nghĩa là thử mọi lời giải cùng lúc rồi chọn cái tốt nhất.** Phần Tóm tắt của bài báo nói máy lượng tử tính toán "dường như song song". Nhưng phép đo (measurement) chỉ trả về *một* chuỗi bit ngẫu nhiên theo phân phối xác suất $|a_w|^2$. Thuật toán lượng tử chỉ hữu ích nếu nó làm xác suất của lời giải tốt tăng lên (nhờ giao thoa), và đó là phần khó.
+**a) Superposition không có nghĩa là thử mọi lời giải cùng lúc rồi chọn cái tốt nhất.** Phần Tóm tắt của bài báo nói máy lượng tử tính toán "dường như song song". Nhưng phép đo (measurement) chỉ trả về *một* chuỗi bit ngẫu nhiên theo phân phối xác suất $|a_w|^2$. Thuật toán lượng tử chỉ hữu ích nếu nó làm xác suất của lời giải tốt tăng lên (nhờ giao thoa), và đó là phần khó.
 
 **b) Với bài toán "hộp đen", mức tăng tốc tối đa là bậc hai.** Thuật toán Grover và khuếch đại biên độ (amplitude amplification) cho tăng tốc bậc hai khi tìm kiếm không cấu trúc, và có kết quả cận dưới cho thấy không thể tốt hơn nếu chỉ truy cập hàm mục tiêu như hộp đen. Bài báo gốc nói điều này ở Mục 7, trích [8] và [24]: mức tăng tốc bậc hai là tối đa với cách tiếp cận hộp đen, nên để có ưu thế lớn hơn ta cần khai thác *cấu trúc* của bài toán (gray-box, white-box). Bài báo cũng trích [24] kết luận rằng với phần cứng gate-based hiện nay, tăng tốc bậc hai chưa đủ để thắng GPU.
 
@@ -32,11 +32,11 @@ Một tuyên bố nghe rất mạnh thường chỉ đúng với một tổ hợ
 
 Bức tranh khá lẫn lộn và có nhiều tranh cãi. Bốn điểm sau đại diện cho các hướng chính.
 
-**Máy ủ lượng tử D-Wave.** Năm 2025, D-Wave cùng cộng sự công bố trên *Science* rằng một máy Advantage2 mô phỏng động lực học của vật liệu từ (spin glass lượng tử) nhanh hơn siêu máy tính cổ điển rất nhiều. Hai điều cần lưu ý. Thứ nhất, đây là bài toán **mô phỏng hệ lượng tử**, không phải tối ưu tổ hợp, nên không suy ra được gì trực tiếp cho tối ưu. Thứ hai, kết quả bị phản biện: các nhóm khác (xem [HPCwire](https://www.hpcwire.com/2025/03/13/d-wave-reports-quantum-supremacy-stirs-immediate-challenge-and-rebuttal/) và bài [arXiv:2503.08247](https://arxiv.org/abs/2503.08247)) cho rằng các phương pháp mô phỏng cổ điển có thể tái tạo một phần kết quả, còn D-Wave phản bác rằng các mô phỏng đó không tính cùng các đại lượng và cấu hình. Theo các nguồn mình đọc, ranh giới vẫn đang được vẽ lại.
+**Máy quantum annealer D-Wave.** Năm 2025, D-Wave cùng cộng sự công bố trên *Science* rằng một máy Advantage2 mô phỏng động lực học của vật liệu từ (spin glass lượng tử) nhanh hơn siêu máy tính cổ điển rất nhiều. Hai điều cần lưu ý. Thứ nhất, đây là bài toán **mô phỏng hệ lượng tử**, không phải tối ưu tổ hợp, nên không suy ra được gì trực tiếp cho tối ưu. Thứ hai, kết quả bị phản biện: các nhóm khác (xem [HPCwire](https://www.hpcwire.com/2025/03/13/d-wave-reports-quantum-supremacy-stirs-immediate-challenge-and-rebuttal/) và bài [arXiv:2503.08247](https://arxiv.org/abs/2503.08247)) cho rằng các phương pháp mô phỏng cổ điển có thể tái tạo một phần kết quả, còn D-Wave phản bác rằng các mô phỏng đó không tính cùng các đại lượng và cấu hình. Theo các nguồn mình đọc, ranh giới vẫn đang được vẽ lại.
 
 **QAOA trong mô phỏng.** Một nghiên cứu đăng ở [*Science Advances*](https://www.science.org/doi/10.1126/sciadv.adm6761) báo cáo bằng chứng về "tăng tốc theo quy mô" của QAOA so với một số thuật toán cổ điển (branch-and-bound) trên bài toán LABS, qua mô phỏng không nhiễu tới 40 qubit. Đây là kết quả **mô phỏng ở kích thước nhỏ, ngoại suy lên**, và lập luận dựa trên giả định máy lượng tử chịu lỗi lý tưởng. Mình chưa đọc toàn văn.
 
-**Thuật toán DQI.** *Decoded quantum interferometry* ([Nature, 2025](https://www.nature.com/articles/s41586-025-09527-5)) là một đề xuất thuật toán dùng biến đổi Fourier lượng tử để đưa một số bài toán tối ưu về bài toán giải mã. Theo phần tóm tắt các kết quả tìm kiếm mình đọc được, lợi thế dự kiến là **lý thuyết hoặc trong mô hình oracle**, phụ thuộc vào cấu trúc bài toán và vào việc dựng được mạch lượng tử đa thức hiệu quả, và một solver cổ điển được thiết kế riêng vẫn có thể thắng trên thể hiện được khảo sát. Một số công trình năm 2026 tiếp tục khảo sát cả hai chiều (tìm điều kiện có lợi thế và chỉ ra giới hạn); mình chỉ đọc tiêu đề các bài đó.
+**Thuật toán DQI.** *Decoded quantum interferometry* ([Nature, 2025](https://www.nature.com/articles/s41586-025-09527-5)) là một đề xuất thuật toán dùng biến đổi Fourier lượng tử để đưa một số bài toán tối ưu về bài toán giải mã. Theo phần tóm tắt các kết quả tìm kiếm mình đọc được, lợi thế dự kiến là **lý thuyết hoặc trong mô hình oracle**, phụ thuộc vào cấu trúc bài toán và vào việc dựng được quantum circuit đa thức hiệu quả, và một solver cổ điển được thiết kế riêng vẫn có thể thắng trên thể hiện được khảo sát. Một số công trình năm 2026 tiếp tục khảo sát cả hai chiều (tìm điều kiện có lợi thế và chỉ ra giới hạn); mình chỉ đọc tiêu đề các bài đó.
 
 **Benchmark đầu-cuối trên IBM Heron.** Bài [arXiv:2603.13607](https://arxiv.org/abs/2603.13607) (Chandarana và cộng sự, 3/2026) so sánh một bộ giải lai lượng tử–cổ điển cho bài toán HUBO (tối ưu nhị phân bậc cao) chạy trên chip IBM Heron r3 với các solver cổ điển mạnh, trên 20 thể hiện, tính **toàn bộ quy trình từ tiền xử lý đến hậu xử lý**. Theo tóm tắt của bài: một lần chạy lai tìm được nghiệm chất lượng cao trong chưa đầy một giây và đạt năng lượng nền trong 14/20 thể hiện; với cùng thời gian chạy, simulated annealing, memetic tabu search và EasySolve **không** đạt chất lượng nghiệm đó, nhưng một phương pháp parallel tempering cải tiến và bộ giải ABS3 chạy GPU **ngang bằng hoặc tốt hơn**. Các tác giả kết luận bộ giải lượng tử "cạnh tranh được với các solver cổ điển mạnh", không phải "thắng".
 
@@ -76,7 +76,7 @@ Phần A cho thấy mỗi bước chuyển đổi đều có cái giá, và các
 
 ## Bài tập
 
-**Bài 1.** Một tác giả báo cáo: "bộ ủ lượng tử của chúng tôi tìm được nghiệm tốt hơn simulated annealing 100 lần nhanh hơn." Hãy liệt kê ít nhất bốn câu hỏi bạn sẽ đặt ra trước khi tin điều này.
+**Bài 1.** Một tác giả báo cáo: "quantum annealer của chúng tôi tìm được nghiệm tốt hơn simulated annealing 100 lần nhanh hơn." Hãy liệt kê ít nhất bốn câu hỏi bạn sẽ đặt ra trước khi tin điều này.
 
 <details>
 <summary>Gợi ý lời giải</summary>

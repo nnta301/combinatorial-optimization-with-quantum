@@ -19,7 +19,7 @@ Một số điểm cần biết:
 Nền tảng IBM Quantum đã được nâng cấp, nên nhiều hướng dẫn cũ không còn chạy:
 
 - Tham số `channel="ibm_quantum"` **không còn hợp lệ**. Phiên bản `qiskit-ibm-runtime` 0.52.0 mà mình dùng để kiểm tra báo `ValueError: 'channel' can only be 'ibm_cloud', or 'ibm_quantum_platform'`. Hãy dùng `ibm_quantum_platform`.
-- `IBMQ.load_account()` và `execute()` của Qiskit cũ không còn dùng được. Dùng `QiskitRuntimeService`, `SamplerV2` và `EstimatorV2` từ `qiskit_ibm_runtime`, theo [hướng dẫn chuyển đổi của IBM](https://qiskit.qotlabs.org/docs/migration-guides/classic-iqp-to-cloud-iqp).
+- `IBMQ.load_account()` và `execute()` của Qiskit cũ không còn dùng được. Dùng `QiskitRuntimeService`, `SamplerV2` và `EstimatorV2` từ `qiskit_ibm_runtime`, xem [tài liệu IBM Quantum](https://quantum.cloud.ibm.com/docs) (tìm hướng dẫn chuyển đổi, "migration guide", từ nền tảng cũ sang nền tảng mới).
 
 ## 2. Tạo tài khoản và lấy thông tin truy cập
 
@@ -125,7 +125,7 @@ Khóa của Qiskit có dạng `q2 q1 q0`, nên $(x_1, x_2, x_3)$ là chuỗi bit
 ## 7. Nhiễu làm hỏng điều gì?
 
 - Mỗi cổng hai qubit (`cz`) có sai số lớn hơn nhiều so với cổng một qubit. Mạch của ta có 8 cổng `cz` sau transpile.
-- Độ sâu mạch càng lớn thì qubit càng bị mất kết hợp (decoherence) trước khi đo xong.
+- Độ sâu mạch càng lớn thì qubit càng bị decoherence trước khi đo xong.
 - Hệ quả thực tế: tăng số lớp $p$ của QAOA có thể cải thiện chất lượng trên giấy nhưng làm kết quả trên máy thật **tệ đi**. Đây chính là hạn chế của kỷ nguyên NISQ đã nhắc ở Mục 1 của bài báo.
 
 ## 8. Xử lý sự cố

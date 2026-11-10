@@ -1,6 +1,6 @@
 # 6 Tối ưu trên máy gate-based (Optimization in a Gate-based Machine)
 
-*Quantum Approximate Optimization Algorithm* (QAOA) là một trong những kỹ thuật tối ưu lượng tử được đề xuất và nghiên cứu gần đây trên các máy tính lượng tử gate-based [20]. Đây là một thuật toán lượng tử lai, gồm cả phần lượng tử lẫn phần cổ điển. Phần lượng tử gồm một mạch có tham số, được dùng để lấy mẫu các lời giải của bài toán đang giải, còn phần cổ điển chịu trách nhiệm tối ưu các tham số của phần lượng tử nhằm tăng xác suất lấy mẫu được các lời giải tốt nhất. Đi sâu vào chi tiết hơn, phần lượng tử của QAOA là một dạng *mạch lượng tử biến phân* (variational quantum circuit), còn gọi là *ansatz*, gồm một số $p$ cho trước các lớp, trong đó mỗi lớp được mô tả bởi tích của hai phép biến đổi unitary $U(H_P, \gamma_k) = e^{-i\gamma_k H_P}$ và $U(H_M, \beta_k) = e^{-i\beta_k H_M}$. Phép thứ nhất phụ thuộc vào bài toán tối ưu cần giải, $H_P$, còn phép thứ hai không phụ thuộc bài toán và dựa trên cái gọi là *mixer Hamiltonian* $H_M$, là tổng các cổng NOT áp dụng lên mọi qubit: $H_M = \sum_{j=1}^{n} X_j$. Vai trò của $U(H_M, \beta_k)$ là tăng xác suất đo được các lời giải chất lượng cao. Ansatz của QAOA được cho bởi phương trình sau:
+*Quantum Approximate Optimization Algorithm* (QAOA) là một trong những kỹ thuật tối ưu lượng tử được đề xuất và nghiên cứu gần đây trên các máy tính lượng tử gate-based [20]. Đây là một thuật toán lượng tử lai, gồm cả phần lượng tử lẫn phần cổ điển. Phần lượng tử gồm một mạch có tham số, được dùng để lấy mẫu các lời giải của bài toán đang giải, còn phần cổ điển chịu trách nhiệm tối ưu các tham số của phần lượng tử nhằm tăng xác suất lấy mẫu được các lời giải tốt nhất. Đi sâu vào chi tiết hơn, phần lượng tử của QAOA là một dạng *variational quantum circuit*, còn gọi là *ansatz*, gồm một số $p$ cho trước các lớp, trong đó mỗi lớp được mô tả bởi tích của hai phép biến đổi unitary $U(H_P, \gamma_k) = e^{-i\gamma_k H_P}$ và $U(H_M, \beta_k) = e^{-i\beta_k H_M}$. Phép thứ nhất phụ thuộc vào bài toán tối ưu cần giải, $H_P$, còn phép thứ hai không phụ thuộc bài toán và dựa trên cái gọi là *mixer Hamiltonian* $H_M$, là tổng các cổng NOT áp dụng lên mọi qubit: $H_M = \sum_{j=1}^{n} X_j$. Vai trò của $U(H_M, \beta_k)$ là tăng xác suất đo được các lời giải chất lượng cao. Ansatz của QAOA được cho bởi phương trình sau:
 
 $$\left|\psi_{(\gamma, \beta)}\right\rangle = \left( \prod_{k=p}^{1} U(H_M, \beta_k)\, U(H_P, \gamma_k) \right) H^{\otimes n} |0\rangle, \tag{41}$$
 
@@ -24,7 +24,7 @@ ta sẽ dùng quantum gate đường chéo không tầm thường duy nhất mà
 
 $$\begin{aligned} H_P &= -9 + 13\,\frac{(I - Z_1)}{2} + 14\,\frac{(I - Z_2)}{2} + 9\,\frac{(I - Z_3)}{2} \\ &\quad - 18\,\frac{(I - Z_1)}{2} \otimes \frac{(I - Z_2)}{2} - 18\,\frac{(I - Z_1)}{2} \otimes \frac{(I - Z_3)}{2} - 18\,\frac{(I - Z_2)}{2} \otimes \frac{(I - Z_3)}{2} \\ &\quad + 36\,\frac{(I - Z_1)}{2} \otimes \frac{(I - Z_2)}{2} \otimes \frac{(I - Z_3)}{2}. \end{aligned}$$
 
-Khai triển các tích tensor, ta được
+Khai triển các tensor product, ta được
 
 $$H_P = -2Z_1 - \frac{5}{2} Z_2 - \frac{9}{2}\, Z_1 \otimes Z_2 \otimes Z_3. \tag{43}$$
 
@@ -40,19 +40,19 @@ và phép biến đổi unitary $U(H_P, \gamma_k)$ có thể được viết là
 
 $$U(H_P, \gamma_k) = e^{-i\gamma_k \sum_{S \subseteq [n]} a_S \bigotimes_{j \in S} Z_j} = \prod_{S \subseteq [n]} e^{-i\gamma_k a_S \bigotimes_{j \in S} Z_j}, \tag{45}$$
 
-trong đó ta dùng thực tế rằng các toán tử $Z_j$ và các tích tensor của chúng giao hoán với nhau để biến mũ của một tổng thành tích của các mũ. Để xây dựng mạch ứng với $U(H_P, \gamma_k)$, ta cần biểu diễn các số hạng $e^{-i\gamma_k a_S \bigotimes_{j \in S} Z_j}$ bằng các quantum gate.
+trong đó ta dùng thực tế rằng các toán tử $Z_j$ và các tensor product của chúng giao hoán với nhau để biến mũ của một tổng thành tích của các mũ. Để xây dựng mạch ứng với $U(H_P, \gamma_k)$, ta cần biểu diễn các số hạng $e^{-i\gamma_k a_S \bigotimes_{j \in S} Z_j}$ bằng các quantum gate.
 
 Hãy bắt đầu với các số hạng tuyến tính trong Hamiltonian của bài toán, tức là các số hạng có dạng $e^{-i\gamma_k h_j Z_j}$. Ta đã thấy ở Mục 2 rằng mũ của một ma trận đường chéo là một ma trận đường chéo. Với các số hạng tuyến tính, ta có
 
 $$e^{-i\gamma_k h_j Z_j} = \begin{pmatrix} e^{-i\gamma_k h_j} & 0 \\ 0 & e^{i\gamma_k h_j} \end{pmatrix} = R_{Z_j}(2\gamma_k h_j), \tag{46}$$
 
-trong đó $R_{Z_j}(2\gamma_k h_j)$ là cổng lượng tử RZ với góc $2\gamma_k h_j$ áp dụng lên qubit $j$.
+trong đó $R_{Z_j}(2\gamma_k h_j)$ là quantum gate RZ với góc $2\gamma_k h_j$ áp dụng lên qubit $j$.
 
 Bây giờ hãy tập trung vào các số hạng bậc hai $e^{-i\gamma_k J_{j\ell} Z_j \otimes Z_\ell}$. Theo cùng cách khai triển mũ, ta được
 
 $$Z_j \otimes Z_\ell = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & -1 & 0 & 0 \\ 0 & 0 & -1 & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix} \Rightarrow e^{-i\gamma_k J_{j\ell} Z_j \otimes Z_\ell} = \begin{pmatrix} e^{-i\gamma_k J_{j\ell}} & 0 & 0 & 0 \\ 0 & e^{i\gamma_k J_{j\ell}} & 0 & 0 \\ 0 & 0 & e^{i\gamma_k J_{j\ell}} & 0 \\ 0 & 0 & 0 & e^{-i\gamma_k J_{j\ell}} \end{pmatrix} = R_{Z_j Z_\ell}(2\gamma_k J_{j\ell}), \tag{47}$$
 
-trong đó ta dùng cổng lượng tử RZZ có mặt trên một số máy tính lượng tử và trình mô phỏng. Cổng lượng tử RZZ có thể được biểu diễn qua các cổng RZ và CNOT như sau:
+trong đó ta dùng quantum gate RZZ có mặt trên một số máy tính lượng tử và trình mô phỏng. Cổng lượng tử RZZ có thể được biểu diễn qua các cổng RZ và CNOT như sau:
 
 $$R_{Z_j Z_\ell}(\alpha) = \mathrm{CNOT}_{j\ell}\; R_{Z_\ell}(\alpha)\; \mathrm{CNOT}_{j\ell}. \tag{48}$$
 

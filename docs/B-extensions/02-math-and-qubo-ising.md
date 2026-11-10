@@ -1,4 +1,4 @@
-# B-02a. Toán học nền: ký hiệu Dirac, tích tensor và dẫn công thức QUBO ↔ Ising
+# B-02a. Toán học nền: ký hiệu Dirac, tensor product và dẫn công thức QUBO ↔ Ising
 
 Mở rộng cho [Phần A, Mục 2.1](../A-translation/02-background.md). Bài báo gốc nén toàn bộ nền toán vào hai trang. Chương này giải thích trực giác cho người đã quen đại số tuyến tính và tối ưu, rồi **dẫn từng bước** các công thức (8)–(11) mà bài báo chỉ phát biểu kết quả. Notebook kiểm chứng: [01-qubo-and-ising](../../notebooks/A-examples/01-qubo-and-ising.ipynb).
 
@@ -20,9 +20,9 @@ Không có gì huyền bí: ký hiệu Dirac chỉ là cách viết gọn cho ve
 
 **Số $2^n$:** để mô tả một trạng thái tổng quát của $n$ qubit cần $2^n$ số phức. Đây là lý do mô phỏng cổ điển trở nên bất khả thi ở $n$ cỡ vài chục, và cũng là lý do ta chỉ mô phỏng được các ví dụ nhỏ (3 đến vài chục qubit) trong các notebook.
 
-## 2. Tích tensor: cách ghép các hệ
+## 2. Tensor product: cách ghép các hệ
 
-Tích tensor $A \otimes B$ (phương trình (3)) chính là **tích Kronecker** của hai ma trận. Hai hệ qubit riêng $\lvert\psi\rangle$ và $\lvert\varphi\rangle$ ghép lại thành $\lvert\psi\rangle \otimes \lvert\varphi\rangle$ (vector có kích thước nhân lên). Viết $\lvert 01 \rangle$ là viết tắt của $\lvert 0\rangle \otimes \lvert 1\rangle$.
+Tensor product $A \otimes B$ (phương trình (3)) chính là **tích Kronecker** của hai ma trận. Hai hệ qubit riêng $\lvert\psi\rangle$ và $\lvert\varphi\rangle$ ghép lại thành $\lvert\psi\rangle \otimes \lvert\varphi\rangle$ (vector có kích thước nhân lên). Viết $\lvert 01 \rangle$ là viết tắt của $\lvert 0\rangle \otimes \lvert 1\rangle$.
 
 Hai quy tắc đủ dùng:
 

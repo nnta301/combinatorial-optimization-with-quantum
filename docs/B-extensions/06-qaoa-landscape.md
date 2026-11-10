@@ -14,7 +14,7 @@ QAOA gồm hai phần ([Mục 6](../A-translation/06-gate-based.md)): phần lư
 Với $p = 1$ chỉ có hai tham số, nên ta vẽ được toàn bộ cảnh quan $E(\gamma, \beta)$ cho bài toán Ví dụ 10. Quan sát trên lưới $241 \times 121$ điểm:
 
 - Giá trị nhỏ nhất trên lưới là $E = -4{,}412$ tại $(\gamma, \beta) \approx (0{,}340;\ 0{,}785)$, xấp xỉ $\beta = \pi/4$.
-- $E$ **tuần hoàn** theo $\gamma$ (chu kỳ $2\pi$ vì $f$ nhận giá trị nguyên) và có đối xứng, nên cùng một cực tiểu xuất hiện nhiều lần. Trên lưới có 44 điểm cực tiểu địa phương (tính cả các bản sao do tính tuần hoàn và đối xứng).
+- $E$ **tuần hoàn** theo $\gamma$ (chu kỳ $2\pi$ vì $f$ nhận giá trị nguyên) và có đối xứng, nên cùng một cực tiểu xuất hiện nhiều lần. Trên lưới có 44 điểm local minimum (tính cả các bản sao do tính tuần hoàn và đối xứng).
 - Tối ưu hóa bằng BFGS từ điểm ngẫu nhiên có thể rơi vào bất kỳ "thung lũng" nào, nên kết quả phụ thuộc điểm khởi đầu.
 
 **Ý nghĩa thực tế:** vòng tối ưu cổ điển không phải phần phụ; nó là một bài toán tối ưu phi lồi thực sự. Trên phần cứng nó còn bị nhiễu lấy mẫu làm gợn thêm. Các kỹ thuật như khởi tạo nhiều điểm, khởi tạo thông minh (xem mục 4), hay dùng bộ tối ưu chịu nhiễu đều nhằm giảm khó khăn này.
@@ -37,7 +37,7 @@ Với mỗi $p$, chạy BFGS từ 12 điểm ngẫu nhiên và lấy kết quả
 Chất lượng tăng nhanh theo $p$ và đạt tối ưu ở $p = 6$. Ba lưu ý:
 
 1. **Đây là bài 3 qubit, không nhiễu.** Với bài lớn hơn và có nhiễu, bức tranh khác: mỗi lớp thêm vào làm mạch sâu hơn (độ sâu mạch Qiskit đã nở từ 16 lên 46 sau transpile cho $p = 2$, [Phần C](../C-hardware/ibm-quantum.md)) nên nhiễu tăng và lợi ích của $p$ lớn có thể biến mất trên máy thật.
-2. **Số tham số là $2p$.** Với $p = 6$ ở bài chỉ có 8 trạng thái, số tham số (12) đã vượt số "bậc tự do" của bài toán nên việc đạt đúng 1,000 không có gì ngạc nhiên.
+2. **Số tham số là $2p$.** Điều ta quan tâm là phân phối xác suất trên $2^3 = 8$ kết quả đo, tức 7 bậc tự do. Với $p = 6$ ansatz có 12 tham số, nhiều hơn 7, nên về mặt đếm tham số nó đủ linh hoạt để điều khiển toàn bộ phân phối; đây là một gợi ý vì sao $P$ đạt gần đúng 1,000 ở $p = 6$ không quá bất ngờ. Đây chỉ là lập luận đếm tham số, không phải chứng minh: các tham số $\gamma, \beta$ không điều khiển độc lập từng xác suất, nên việc thực sự đạt được xác suất 1 phải do tối ưu số xác nhận, như ở bảng trên.
 3. **Tối ưu toàn cục các tham số không được đảm bảo** (bài toán phi lồi); số liệu là tốt nhất trong 12 lần thử.
 
 ## 4. QAOA là phiên bản rời rạc hóa của quantum annealing

@@ -28,7 +28,7 @@ Khi ma trận $A$ không chéo hóa được, mũ ma trận có thể được t
 
 Ta nói hai ma trận *giao hoán* (commute) nếu $AB = BA$. Ta định nghĩa *giao hoán tử* (commutator) của $A$ và $B$ là $[A, B] = AB - BA$. Nếu hai ma trận $A$ và $B$ giao hoán thì giao hoán tử của chúng bằng $[A, B] = 0$. Khi $A$ và $B$ giao hoán, ta cũng có $e^{A}e^{B} = e^{A+B}$. Nếu $A$ và $B$ không giao hoán, đẳng thức trên không nhất thiết đúng.
 
-Ta sẽ dùng *ký hiệu Dirac* (Dirac's notation) để chỉ các vector $|\psi\rangle$ và các covector $\langle\psi|$. Ta dùng $\otimes$ để chỉ tích tensor của hai vector và của hai toán tử. Vì ta chỉ làm việc với không gian vector của computational basis, $|0\rangle$ và $|1\rangle$, nên ta dùng phép nối chuỗi để ký hiệu tích tensor của hai vector. Ví dụ, $|00\rangle = |0\rangle \otimes |0\rangle$. Giả sử ta có toán tử $A$ tác dụng lên không gian vector $V_1$ và toán tử $B$ tác dụng lên không gian vector $V_2$, thì tích tensor của hai toán tử này, ký hiệu $A \otimes B$, sẽ tác dụng lên tích tensor của các không gian vector $V_1 \otimes V_2$ như sau:
+Ta sẽ dùng *ký hiệu Dirac* (Dirac's notation) để chỉ các vector $|\psi\rangle$ và các covector $\langle\psi|$. Ta dùng $\otimes$ để chỉ tensor product của hai vector và của hai toán tử. Vì ta chỉ làm việc với không gian vector của computational basis, $|0\rangle$ và $|1\rangle$, nên ta dùng phép nối chuỗi để ký hiệu tensor product của hai vector. Ví dụ, $|00\rangle = |0\rangle \otimes |0\rangle$. Giả sử ta có toán tử $A$ tác dụng lên không gian vector $V_1$ và toán tử $B$ tác dụng lên không gian vector $V_2$, thì tensor product của hai toán tử này, ký hiệu $A \otimes B$, sẽ tác dụng lên tensor product của các không gian vector $V_1 \otimes V_2$ như sau:
 
 $$(A \otimes B)(|\psi\rangle \otimes |\varphi\rangle) = (A|\psi\rangle) \otimes (B|\varphi\rangle). \tag{3}$$
 
@@ -107,7 +107,7 @@ trong đó $\theta$ và $\varphi$ là các tọa độ cầu.
   <em>Hình 1: Biểu diễn Bloch sphere của một trạng thái qubit.</em>
 </p>
 
-Trạng thái lượng tử của một hệ nhiều qubit có thể được biểu diễn bằng tích tensor của các trạng thái lượng tử của từng qubit: $|\psi\rangle = \sum_{w \in \{0,1\}^n} a_w |w\rangle$, trong đó $w \in \{0, 1\}^n$ và $a_w \in \mathbb{C}$. Như vậy, mỗi trạng thái lượng tử trong một hệ $n$ qubit được biểu diễn bằng một bộ gồm $2^n$ số phức.
+Trạng thái lượng tử của một hệ nhiều qubit có thể được biểu diễn bằng tensor product của các trạng thái lượng tử của từng qubit: $|\psi\rangle = \sum_{w \in \{0,1\}^n} a_w |w\rangle$, trong đó $w \in \{0, 1\}^n$ và $a_w \in \mathbb{C}$. Như vậy, mỗi trạng thái lượng tử trong một hệ $n$ qubit được biểu diễn bằng một bộ gồm $2^n$ số phức.
 
 Mỗi quantum gate được biểu diễn bởi một phép biến đổi *unitary* $U : \mathbb{C}^{2^n} \to \mathbb{C}^{2^n}$, thỏa $U^\dagger U = UU^\dagger = I$, trong đó $U^\dagger$ là liên hợp Hermite của $U$ và $I$ là ma trận đơn vị. Có nhiều quantum gate khác nhau [33]. Tiếp theo ta mô tả những cổng quan trọng nhất trong bài báo này.
 

@@ -125,7 +125,7 @@ trong đó ta cần thêm các ràng buộc ứng với hoán vị: các phươn
 Các hàm pseudo-Boolean mà máy tính lượng tử có thể tối ưu là các hàm không ràng buộc. Bước tiếp theo trong việc biến đổi bài toán tối ưu của ta là đưa các ràng buộc của bài toán vào hàm mục tiêu cuối cùng. Ta nói một lời giải của bài toán là **khả thi** (feasible) khi nó thỏa mọi ràng buộc và **không khả thi** (infeasible) khi nó không thỏa ít nhất một ràng buộc. Để kết hợp các ràng buộc và hàm mục tiêu thành một biểu thức duy nhất cần cực tiểu hóa, ta đưa vào các *biểu thức phạt* (penalty expression) làm tăng giá trị hàm mục tiêu nếu lời giải là infeasible. Ta minh họa bước này ở Hình 2.
 
 <p align="center">
-  <img src="figures/fig2-feasible-infeasible.svg" alt="Hình 2: Phân loại lời giải thành feasible và infeasible, và biểu thức phạt" width="520">
+  <img src="figures/fig2-feasible-infeasible.svg" alt="Hình 2: Phân loại lời giải thành feasible và infeasible, và biểu thức phạt" width="560">
   <br>
   <em>Hình 2: Các lời giải trong bài toán của ta có thể được phân thành feasible và infeasible. Để xây dựng một biểu thức duy nhất cho hàm mục tiêu, ta cần đảm bảo mọi lời giải infeasible có giá trị mục tiêu lớn hơn lời giải feasible tốt nhất. Ta làm điều này bằng cách cộng các biểu thức phạt vào hàm mục tiêu.</em>
 </p>

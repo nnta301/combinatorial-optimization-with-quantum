@@ -27,15 +27,15 @@ Cùng bảng đó, viết bằng toán tử Pauli-Z, là $H_P = -2Z_1 - \tfrac52
 
 | | Simulated annealing (SA) | Quantum annealing (QA) |
 |---|---|---|
-| Hệ ở đâu | Một lời giải $x$ cụ thể tại mỗi thời điểm | Một trạng thái lượng tử (chồng chập các lời giải) |
+| Hệ ở đâu | Một lời giải $x$ cụ thể tại mỗi thời điểm | Một trạng thái lượng tử (superposition các lời giải) |
 | Cái gì "nóng" | Nhiệt độ $T$: xác suất chấp nhận bước xấu | Trường ngang (transverse field) $H_0 = -\sum X_j$ trộn các lời giải |
 | Lịch trình | $T$ giảm từ cao xuống thấp | $H(s) = (1-s)H_0 + sH_P$, $s: 0 \to 1$ |
 | Cách vượt rào năng lượng | Nhảy nhiệt (thermal hop): cần đủ nhiệt để leo qua | Hiệu ứng đường hầm (quantum tunneling) và giao thoa |
-| Đảm bảo lý thuyết | Với lịch làm nguội đủ chậm (logarit) hội tụ về nghiệm tối ưu | Adiabatic theorem: nếu đủ chậm, ở lại trạng thái cơ bản |
+| Đảm bảo lý thuyết | Với lịch làm nguội đủ chậm (logarit) hội tụ về nghiệm tối ưu | Adiabatic theorem: nếu đủ chậm, ở lại ground state |
 | Điều kiện "đủ chậm" | Rất chậm theo cỡ bài toán trong trường hợp xấu | $T \gg 1/\Delta_{\min}^2$, với $\Delta_{\min}$ là energy gap nhỏ nhất |
 | Thực tế | Chạy trên CPU, rẻ, dễ tinh chỉnh | Chạy trên phần cứng chuyên dụng; hệ hở, có nhiễu, không thật sự đoạn nhiệt |
 
-Điểm chung: cả hai đều bắt đầu từ trạng thái "lộn xộn" (nhiệt độ cao hoặc chồng chập đều) rồi dần "đóng băng" vào vùng năng lượng thấp.
+Điểm chung: cả hai đều bắt đầu từ trạng thái "lộn xộn" (nhiệt độ cao hoặc superposition đều) rồi dần "đóng băng" vào vùng năng lượng thấp.
 
 Về lợi thế của đường hầm: trực giác là QA có thể vượt qua các rào năng lượng *cao nhưng mỏng* mà SA phải leo qua. Điều này đúng về mặt khái niệm, nhưng nó phụ thuộc cấu trúc của địa hình năng lượng, và chưa có bằng chứng chung rằng nó mang lại lợi thế cho các bài toán tối ưu tổ hợp thông thường (xem [B-01](01-quantum-advantage.md)).
 
@@ -63,7 +63,7 @@ Với 3 qubit, ta có thể tiến hóa chính xác phương trình Schrödinger
 
 Các quan sát:
 
-1. **Ủ nhanh vẫn tốt hơn ngẫu nhiên.** Ngay $T = 1$ (rất không đoạn nhiệt) đã cho $P = 0{,}26$, gấp đôi ngẫu nhiên. Điều này khớp với nhận xét ở Mục 2.2 của bài báo: quantum annealer không bắt buộc phải ở trạng thái cơ bản trong suốt quá trình.
+1. **Ủ nhanh vẫn tốt hơn ngẫu nhiên.** Ngay $T = 1$ (rất không đoạn nhiệt) đã cho $P = 0{,}26$, gấp đôi ngẫu nhiên. Điều này khớp với nhận xét ở Mục 2.2 của bài báo: quantum annealer không bắt buộc phải ở ground state trong suốt quá trình.
 2. **Cần $T$ khá lớn để gần như chắc chắn.** $P > 0{,}98$ khi $T \approx 16$, cỡ hai chục lần $1/\Delta_{\min}$ (với $\Delta_{\min} \approx 1{,}15$). Với bài toán lớn hơn, nơi $\Delta_{\min}$ có thể đóng rất nhanh theo kích thước, thời gian cần thiết có thể tăng mạnh; đó là điều adiabatic theorem nói và là điểm yếu tiềm tàng của cách tiếp cận này.
 3. **Thang năng lượng quan trọng.** Giá trị tuyệt đối của $T$ chỉ có nghĩa trong đơn vị năng lượng đang dùng: nhân **cả** $H_0$ **và** $H_P$ với $\lambda$ tương đương nhân $T$ với $\lambda$ (chỉ tích năng lượng × thời gian mới quan trọng).
 
@@ -81,10 +81,10 @@ Máy ủ thật (D-Wave) khác mô hình trên ở nhiều điểm: hệ tương
 $H(s) = -aX - bZ$ với $a = 1-s$, $b = s$ có hai trị riêng $\pm\sqrt{a^2 + b^2}$ (vì $(aX + bZ)^2 = (a^2 + b^2)I$). Gap $= 2\sqrt{(1-s)^2 + s^2}$. Hàm $(1-s)^2 + s^2$ đạt nhỏ nhất ở $s = \tfrac12$, giá trị $\tfrac12$, nên gap nhỏ nhất $= 2\sqrt{1/2} = \sqrt2 \approx 1{,}414$ tại $s = 0{,}5$. Bài toán một qubit này không có chỗ nào gap đóng, nên ủ dễ dàng.
 </details>
 
-**Bài 2.** Vì sao thuật toán ủ lượng tử đòi hỏi trạng thái ban đầu là trạng thái cơ bản của $H_0 = -\sum_j X_j$ (chồng chập đều), chứ không phải một trạng thái ngẫu nhiên?
+**Bài 2.** Vì sao thuật toán quantum annealing đòi hỏi trạng thái ban đầu là ground state của $H_0 = -\sum_j X_j$ (superposition đều), chứ không phải một trạng thái ngẫu nhiên?
 
 <details>
 <summary>Lời giải</summary>
 
-Adiabatic theorem đảm bảo hệ ở lại trạng thái cơ bản *tức thời* của $H(s)$ nếu ban đầu nó ở trạng thái cơ bản của $H(0) = H_0$. Trạng thái cơ bản của $-\sum_j X_j$ là $\lvert{+}\rangle^{\otimes n}$ (chồng chập đều của mọi lời giải), dễ chuẩn bị (một lớp cổng Hadamard). Nếu bắt đầu từ trạng thái khác, ta không còn đảm bảo nào về trạng thái cuối. (Lưu ý bài báo nói máy ủ thực tế "không bắt buộc" ở trạng thái cơ bản trong suốt quá trình, nhưng đảm bảo lý thuyết thì cần điều đó.)
+Adiabatic theorem đảm bảo hệ ở lại ground state *tức thời* của $H(s)$ nếu ban đầu nó ở ground state của $H(0) = H_0$. Ground state của $-\sum_j X_j$ là $\lvert{+}\rangle^{\otimes n}$ (superposition đều của mọi lời giải), dễ chuẩn bị (một lớp cổng Hadamard). Nếu bắt đầu từ trạng thái khác, ta không còn đảm bảo nào về trạng thái cuối. (Lưu ý bài báo nói máy ủ thực tế "không bắt buộc" ở ground state trong suốt quá trình, nhưng đảm bảo lý thuyết thì cần điều đó.)
 </details>
